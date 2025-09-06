@@ -32,7 +32,7 @@ PROGRAM-ID. ACCOUNT-MGMT.
 ![alt text](image.png)
 
 > Choose the option as shown in screenshot  
-> Initially try `cmd + shift + P`  
+> Initially try `cmd + shift + B`  
 > It should build and automatically get Inputs from data/*-input.txt and log output in data/*-output.txt  
 
 
