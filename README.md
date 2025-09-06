@@ -8,16 +8,17 @@
 
 ## Run
 
-> Ensure you have docker
-> Clone this repo
-> Open the folder of this repo in VS Code
-> Press `cmd + shift + P`
+> Ensure you have docker  
+> Clone this repo  
+> Open the folder of this repo in VS Code  
+> Press `cmd + shift + P`  
+
 ![alt text](image.png)
-> Choose the option as shown in screenshot
 
+> Choose the option as shown in screenshot  
+> Initially try `cmd + shift + P`  
+> It should build and automatically get Inputs from data/*-input.txt and log output in data/*-output.txt  
 
-> Initially try `cmd + shift + P`
-> It should build and automatically get Inputs from data/\*-input.txt and log output in data/\*-output.txt
 
 ## For Testers
 
