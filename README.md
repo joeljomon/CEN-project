@@ -12,7 +12,7 @@
 > Clone this repo
 > Open the folder of this repo in VS Code
 > Press `cmd + shift + P`
-> ![alt text](image.png)
+![alt text](image.png)
 > Choose the option as shown in screenshot
 
 
