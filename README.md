@@ -5,6 +5,22 @@
 - Input in `data/incollege-input.txt` making sure `data/incollege-output.txt` and `data/accounts.dat` exist
 - It will create upto 5 users with password policy enforcement of >8 and <=12 chars, 1 digit, speacial and UPPER req
 
+## Folder Structure
+
+- `src` is where all the code lives
+- `src/InCollege.cob` is the main file which references to files like `AccountManagement.cob` and so on
+- The main idea is to keep functionalities like password check, input/output seperate and so on seperate
+- If adding a new logic like `login` functionalitiy add a `logic.cob` in src/ and reference it in  `InCollege.cob` wherever needed like below:
+> An example of `AccountManagement.cob` - how it was referenced in `InCollege.cob`
+```
+CALL "ACCOUNT-MGMT" USING WS-COMMAND WS-USERNAME WS-PASSWORD WS-MESSAGE
+```
+> and in AccountManagement.cob define it as 
+```
+IDENTIFICATION DIVISION.
+PROGRAM-ID. ACCOUNT-MGMT.
+```
+
 
 ## Run
 
