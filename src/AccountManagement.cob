@@ -89,7 +89,7 @@
                    MOVE "Account created successfully." TO AM-MESSAGE
 
               WHEN "LOGIN"
-                   MOVE "Stub: Login not yet implemented." TO AM-MESSAGE
+                   CALL "LOGIN" USING AM-USERNAME AM-PASSWORD AM-MESSAGE
            END-EVALUATE
            GOBACK.
        END PROGRAM ACCOUNT-MGMT.
