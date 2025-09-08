@@ -26,7 +26,7 @@ IDENTIFICATION DIVISION.
            OPEN INPUT INPUT-FILE
            OPEN OUTPUT OUTPUT-FILE
            
-           MOVE "Welcome, College Student!" TO WS-OUTPUT-LINE
+           MOVE "Welcome, TestUser!" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
            
            PERFORM UNTIL WS-CHOICE = 4
@@ -45,6 +45,8 @@ IDENTIFICATION DIVISION.
            MOVE "Find someone you know" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
            MOVE "Learn a new skill" TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
+           MOVE "Exit" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
            MOVE "Enter your choice:" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH.
