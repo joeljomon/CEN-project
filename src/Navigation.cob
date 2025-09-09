@@ -15,7 +15,6 @@ IDENTIFICATION DIVISION.
        01 INPUT-RECORD         PIC X(10).
        
        FD OUTPUT-FILE.
-       01 OUTPUT-RECORD        PIC X(80).
        
        WORKING-STORAGE SECTION.
        01 WS-CHOICE            PIC 9.
@@ -90,6 +89,30 @@ IDENTIFICATION DIVISION.
                PERFORM SKILL-MENU
            END-IF.
        
+       GET-VALID-MAIN-CHOICE.
+           MOVE 'N' TO WS-VALID-CHOICE
+           PERFORM UNTIL WS-VALID-CHOICE = 'Y'
+               PERFORM GET-CHOICE
+               IF WS-CHOICE >= 1 AND WS-CHOICE <= 4
+                   MOVE 'Y' TO WS-VALID-CHOICE
+               ELSE
+                   MOVE "Invalid choice. Please try again." TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+               END-IF
+           END-PERFORM.
+       
+       GET-VALID-SKILL-CHOICE.
+           MOVE 'N' TO WS-VALID-CHOICE
+           PERFORM UNTIL WS-VALID-CHOICE = 'Y'
+               PERFORM GET-CHOICE
+               IF WS-CHOICE >= 1 AND WS-CHOICE <= 6
+                   MOVE 'Y' TO WS-VALID-CHOICE
+               ELSE
+                   MOVE "Invalid choice. Please try again." TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+               END-IF
+           END-PERFORM.
+       
        GET-CHOICE.
            READ INPUT-FILE INTO INPUT-RECORD
            MOVE FUNCTION NUMVAL(INPUT-RECORD) TO WS-CHOICE.
@@ -98,4 +121,3 @@ IDENTIFICATION DIVISION.
            DISPLAY WS-OUTPUT-LINE
            MOVE WS-OUTPUT-LINE TO OUTPUT-RECORD
            WRITE OUTPUT-RECORD.
-       
