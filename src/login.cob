@@ -32,7 +32,8 @@
        01  WS-USER-INPUT.
            05 WS-USERNAME           PIC X(20).
            05 WS-PASSWORD           PIC X(12).
-
+      
+      *> Flags to control program flow
        01  WS-FLAGS.
            05 WS-INPUT-EOF-FLAG     PIC A(1) VALUE 'N'.
            05 WS-USERS-EOF-FLAG     PIC A(1) VALUE 'N'.
@@ -46,7 +47,7 @@
                  15 STORED-PASSWORD PIC X(12).
 
        LINKAGE SECTION.
-
+       
        01 LOGIN-USERNAME PIC X(20).
        01 LOGIN-PASSWORD PIC X(20).
        01 LOGIN-MESSAGE  PIC X(80).
@@ -54,7 +55,7 @@
        PROCEDURE DIVISION USING LOGIN-USERNAME 
                                 LOGIN-PASSWORD LOGIN-MESSAGE.
       
-      MAIN-PROCEDURE.
+           MAIN-PROCEDURE.
            PERFORM 1000-INITIALIZE.
            PERFORM 2000-LOGIN-ROUTINE.
            GOBACK.
@@ -64,6 +65,7 @@
            MOVE LOGIN-PASSWORD TO WS-PASSWORD
            OPEN INPUT USER-ACCOUNTS-FILE.
 
+      *>Check if the file opened successfully
            IF WS-ACCOUNT-FILE-STATUS NOT = "00"
               MOVE "Y" TO WS-USERS-EOF-FLAG
            ELSE
@@ -81,9 +83,11 @@
            END-IF.
 
            CLOSE USER-ACCOUNTS-FILE.
-
+       
+      *> Main loop for login attempts
        2000-LOGIN-ROUTINE.
            MOVE 'N' TO WS-LOGIN-SUCCESS.
+      *> Loop until successful login or EOF
            PERFORM WITH TEST AFTER UNTIL WS-LOGIN-SUCCESS = 'Y'
                    OR WS-INPUT-EOF-FLAG = 'Y'
 
@@ -92,28 +96,31 @@
                IF WS-INPUT-EOF-FLAG = 'N'
                    PERFORM 2100-VALIDATE-CREDENTIALS
                    IF WS-LOGIN-SUCCESS = 'Y'
-                       MOVE "You have successfully logged in."
+                       MOVE 'You have successfully logged in.'
                          TO WS-DISPLAY-LINE
                        PERFORM 9000-DISPLAY-LINE
                    ELSE
-                       MOVE "Incorrect username/password, please try again"
+                   MOVE "Incorrect username/password, please try again"
                          TO WS-DISPLAY-LINE
                        PERFORM 9000-DISPLAY-LINE
                    END-IF
                END-IF
            END-PERFORM.
 
-
+      *>Searches the stored credentials for a matching username
+      *> and password
        2100-VALIDATE-CREDENTIALS.
            MOVE 'N' TO WS-LOGIN-SUCCESS.
            PERFORM VARYING I FROM 1 BY 1 UNTIL I > WS-USER-COUNT
                IF STORED-USERNAME(I) = WS-USERNAME AND
                   STORED-PASSWORD(I) = WS-PASSWORD
+      *> If a match is found, set the success flag and exit
                    MOVE 'Y' TO WS-LOGIN-SUCCESS
                    EXIT PERFORM
                END-IF
            END-PERFORM.
 
+      *> Displays the message then sends to the calling program
        9000-DISPLAY-LINE.
            MOVE WS-DISPLAY-LINE TO LOGIN-MESSAGE.
            display WS-DISPLAY-LINE.

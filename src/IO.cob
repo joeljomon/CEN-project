@@ -4,9 +4,9 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT INPUT-FILE ASSIGN TO "data/InCollege-Input.txt"
+           SELECT INPUT-FILE ASSIGN TO "../data/InCollege-Input.txt"
                ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT OUTPUT-FILE ASSIGN TO "data/InCollege-Output.txt"
+           SELECT OUTPUT-FILE ASSIGN TO "../data/InCollege-Output.txt"
                ORGANIZATION IS LINE SEQUENTIAL.
 
        DATA DIVISION.
@@ -38,4 +38,4 @@
                    WRITE OUTPUT-REC
            END-EVALUATE
            GOBACK.
-       END PROGRAM IO-MODULE.
+      * END PROGRAM IO-MODULE.
