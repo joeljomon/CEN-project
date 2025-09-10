@@ -26,7 +26,7 @@
            OPEN INPUT INPUT-FILE
            OPEN OUTPUT OUTPUT-FILE
 
-           MOVE "Welcome, TestUser!" TO WS-OUTPUT-LINE
+           MOVE "Main Menu: " TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
 
            PERFORM UNTIL WS-CHOICE = 4
@@ -118,3 +118,4 @@
            DISPLAY FUNCTION TRIM(WS-OUTPUT-LINE)
            MOVE WS-OUTPUT-LINE TO OUTPUT-RECORD
            WRITE OUTPUT-RECORD.
+
