@@ -26,8 +26,8 @@
        01  WS-DISPLAY-LINE          PIC X(80).
 
        01  WS-IO-COMMUNICATION.
-           05 WS-IO-COMMAND         PIC X(20).
-           05 WS-IO-LINE            PIC X(80).
+           05 WS-IO-COMMAND         PIC X(20) VALUE SPACES.
+           05 WS-IO-LINE            PIC X(80) VALUE SPACES.
 
        01  WS-USER-INPUT.
            05 WS-USERNAME           PIC X(20).
@@ -56,13 +56,18 @@
                                 LOGIN-PASSWORD LOGIN-MESSAGE.
       
            MAIN-PROCEDURE.
+      *     display 'Inside Login Module'
+      *     display 'user' login-username
+      *     display 'pass' login-password
+           
            PERFORM 1000-INITIALIZE.
-           PERFORM 2000-LOGIN-ROUTINE.
+           PERFORM 2000-LOGIN-ROUTINE. 
+           
+
+           CALL "IO-MODULE" USING 'CLOSE' WS-IO-LINE.
            GOBACK.
 
        1000-INITIALIZE.
-           MOVE LOGIN-USERNAME TO WS-USERNAME
-           MOVE LOGIN-PASSWORD TO WS-PASSWORD
            OPEN INPUT USER-ACCOUNTS-FILE.
 
       *>Check if the file opened successfully
@@ -83,30 +88,33 @@
            END-IF.
 
            CLOSE USER-ACCOUNTS-FILE.
+      *     MOVE 'OPEN' TO WS-IO-COMMAND
+      *     CALL "IO-MODULE" USING WS-IO-COMMAND
+      *                         WS-IO-LINE.
+
        
       *> Main loop for login attempts
        2000-LOGIN-ROUTINE.
-           MOVE 'N' TO WS-LOGIN-SUCCESS.
-      *> Loop until successful login or EOF
-           PERFORM WITH TEST AFTER UNTIL WS-LOGIN-SUCCESS = 'Y'
-                   OR WS-INPUT-EOF-FLAG = 'Y'
-
-
-
-               IF WS-INPUT-EOF-FLAG = 'N'
+      *     display 'Inside 2000-LOGIN-ROUTINE'
+      
+              
+           MOVE 'N' TO WS-LOGIN-SUCCESS
+           MOVE LOGIN-USERNAME TO WS-USERNAME
+           MOVE LOGIN-PASSWORD TO WS-PASSWORD
                    PERFORM 2100-VALIDATE-CREDENTIALS
                    IF WS-LOGIN-SUCCESS = 'Y'
-                       MOVE 'You have successfully logged in.'
+              MOVE "You have successfully logged in."
                          TO WS-DISPLAY-LINE
-                       PERFORM 9000-DISPLAY-LINE
+                       PERFORM 9000-DISPLAY-AND-WRITE-LINE
                    ELSE
-                   MOVE "Incorrect username/password, please try again"
-                         TO WS-DISPLAY-LINE
-                       PERFORM 9000-DISPLAY-LINE
+             MOVE WS-USERNAME "Incorrect username/password, try again" 
+                             TO WS-DISPLAY-LINE
+                       PERFORM 9000-DISPLAY-AND-WRITE-LINE
                    END-IF
-               END-IF
-           END-PERFORM.
+            .
 
+            
+      *> VALIDATE THE CREDENTIALS
       *>Searches the stored credentials for a matching username
       *> and password
        2100-VALIDATE-CREDENTIALS.
@@ -119,9 +127,12 @@
                    EXIT PERFORM
                END-IF
            END-PERFORM.
+    
 
       *> Displays the message then sends to the calling program
-       9000-DISPLAY-LINE.
+       9000-DISPLAY-AND-WRITE-LINE.
            MOVE WS-DISPLAY-LINE TO LOGIN-MESSAGE.
-           display WS-DISPLAY-LINE.
+      *     display WS-DISPLAY-LINE.
+      *     CALL "IO-MODULE" USING 'WRITE' WS-DISPLAY-LINE.
+
 
