@@ -1,0 +1,227 @@
+######################
+# Tester 1 : For Login & Nav
+######################
+
+##Test Case 1: Account Creation
+2
+validuser
+ValidPass1!
+
+
+##Test Case 2: Password Too Short
+2
+user2
+Short1!
+
+##Test Case 3: Missing Uppercase
+2
+user3
+validpass1!
+
+##Test Case 4: Missing Digit
+2
+user4
+ValidPass!
+
+##Test Case 5: Missing Special Character
+2
+user5
+ValidPass1
+
+
+##Test Case 6: Duplicate Username
+2
+validuser
+ValidPass2!
+
+
+##Test Case 7: Very Long Username
+2
+thisusernameisverylongandmightcauseissues
+ValidPass1!
+
+
+Test Case 8: Empty Username
+2
+
+ValidPass1!
+
+
+##Test Case 9: Password with 12 characters (boundary test)
+2
+boundaryuser
+ValidPass12!
+
+##Test Case 10: Invalid Menu Options
+5
+
+
+##FOR NAVIGATION
+Test Case 1: Basic Navigation Flow
+1
+4
+
+Test Case 2: Job Search Flow
+1
+4
+
+Test Case 3: Find Someone Flow
+2
+4
+
+Test Case 4: Skills Menu - Python Programming
+3
+1
+6
+4
+
+Test Case 5: Skills Menu - Data Analysis
+3
+2
+6
+4
+
+Test Case 6: Skills Menu - Web Development
+3
+3
+6
+4
+
+Test Case 7: Skills Menu - Digital Marketing
+3
+4
+6
+4
+
+Test Case 8: Skills Menu - Project Management
+3
+5
+6
+4
+
+Test Case 9: Invalid Main Menu Choice - High Number
+5
+2
+4
+
+Test Case 10: Invalid Main Menu Choice - Zero
+0
+2
+4
+
+Test Case 11: Invalid Skills Menu Choice
+3
+8
+6
+
+Test Case 12: Skills Menu Boundary Test
+3
+7
+6
+4
+
+Test Case 13: Non-Numeric Input
+abc
+2
+4
+
+Test Case 14: Multiple Invalid Choices
+9
+0
+1
+4
+
+Test Case 15: Complete Skills Flow Test
+3
+1
+2
+3
+4
+5
+6
+4
+
+
+##TO TEST THE ENTIRE PROGRAM
+2
+testuser1
+Password123!
+1
+testuser1
+Password123!
+3
+1
+6
+3
+2
+6
+3
+3
+6
+3
+4
+6
+3
+5
+6
+3
+6
+2
+
+
+######################
+# Tester 2 : Acc Management and Policies
+######################
+
+2 ##Valid account creation (working password #1) → confirm happy path works.
+student1
+Password1!
+2 ##Valid account creation (working password #2) → confirm more than one account can exist.
+student2
+Testing123!
+2 ##Too short password → negative.
+student3
+Test
+2 ##Too long password → negative.
+student4
+Testing123456
+2 ##Password exactly 8 characters → edge positive.
+student5
+Pass123#
+2 ##Password exactly 12 characters → edge positive.
+student6
+Testing123#!
+2 ##No capital letter → negative.
+student7
+password123
+2 ##No digit → negative.
+student8
+Password#!
+2 ##No special character → negative.
+student9
+Testing123
+2 ##Duplicate username (try to reuse one of the valid accounts from step 1–2) → negative.
+student1
+Password1!
+2 ##5th account creation
+student10
+Tester123#
+2 ##Too many accounts created 
+student11
+Account11#
+1 ##Login with incorrect password (existing user) → negative.
+student12
+ValidTest1!
+1 ##Login with nonexistent username → negative.
+student13
+toomany
+1 ##Persistence check (restart program and log in again with one of the earlier valid accounts) → confirm accounts are saved and reloaded.
+student1
+Password1!
+2 ##too many accounts 
+student2
+Testing123
+1 ##(nonexistent username, tied to login failure test)
+student14
+ValidTest1!
+
