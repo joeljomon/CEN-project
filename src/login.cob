@@ -1,6 +1,5 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. LOGIN.
-       AUTHOR. Lakshmi Prakash.
       *> This program handles the login logic of the InCollege
       *> application. It prompts the user to enter their credentials,
       *> validates them using the accounts file, then returns the 
