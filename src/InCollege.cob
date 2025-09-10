@@ -15,44 +15,103 @@
            MOVE "OPEN" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
-           MOVE "Welcome to InCollege!" TO WS-LINE
-           MOVE "WRITE" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+           PERFORM UNTIL WS-CHOICE = 9
+               MOVE "Welcome to InCollege!" TO WS-LINE
+               MOVE "WRITE" TO WS-COMMAND
+               CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
-           MOVE "1. Log In" TO WS-LINE
-           MOVE "WRITE" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+               MOVE "1. Log In" TO WS-LINE
+               MOVE "WRITE" TO WS-COMMAND
+               CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
-           MOVE "2. Create New Account" TO WS-LINE
-           MOVE "WRITE" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+               MOVE "2. Create New Account" TO WS-LINE
+               MOVE "WRITE" TO WS-COMMAND
+               CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
-           MOVE "READ" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
-           MOVE FUNCTION NUMVAL(WS-LINE(1:1)) TO WS-CHOICE
+               MOVE "9. Exit" TO WS-LINE
+               MOVE "WRITE" TO WS-COMMAND
+               CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
-           EVALUATE WS-CHOICE
-              WHEN 1
-                   MOVE "LOGIN" TO WS-COMMAND
-                   CALL "ACCOUNT-MGMT" USING WS-COMMAND WS-USERNAME WS-PASSWORD WS-MESSAGE
-                   MOVE "WRITE" TO WS-COMMAND
-                   CALL "IO-MODULE" USING WS-COMMAND WS-MESSAGE
-              WHEN 2
-                   MOVE "READ" TO WS-COMMAND
-                   CALL "IO-MODULE" USING WS-COMMAND WS-USERNAME
-                   MOVE "READ" TO WS-COMMAND
-                   CALL "IO-MODULE" USING WS-COMMAND WS-PASSWORD
+               *> Read main menu choice
+               MOVE "READ" TO WS-COMMAND
+               CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+               IF WS-LINE = HIGH-VALUES
+                   MOVE 9 TO WS-CHOICE
+                   EXIT PERFORM
+               ELSE
+                   MOVE FUNCTION NUMVAL(WS-LINE(1:1)) TO WS-CHOICE
+               END-IF
 
-                   MOVE "CREATE" TO WS-COMMAND
-                   CALL "ACCOUNT-MGMT" USING WS-COMMAND WS-USERNAME WS-PASSWORD WS-MESSAGE
+               EVALUATE WS-CHOICE
+                  WHEN 1
+                       *> Username
+                       MOVE "READ" TO WS-COMMAND
+                       CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+                       IF WS-LINE = HIGH-VALUES
+                           MOVE 9 TO WS-CHOICE
+                           EXIT PERFORM
+                       ELSE
+                           MOVE WS-LINE(1:20) TO WS-USERNAME
+                       END-IF
 
-                   MOVE "WRITE" TO WS-COMMAND
-                   CALL "IO-MODULE" USING WS-COMMAND WS-MESSAGE
-              WHEN OTHER
-                   MOVE "Invalid choice" TO WS-LINE
-                   MOVE "WRITE" TO WS-COMMAND
-                   CALL "IO-MODULE" USING WS-COMMAND WS-LINE
-           END-EVALUATE
+                       *> Password
+                       MOVE "READ" TO WS-COMMAND
+                       CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+                       IF WS-LINE = HIGH-VALUES
+                           MOVE 9 TO WS-CHOICE
+                           EXIT PERFORM
+                       ELSE
+                           MOVE WS-LINE(1:20) TO WS-PASSWORD
+                       END-IF
+
+                       MOVE "LOGIN" TO WS-COMMAND
+                       CALL "ACCOUNT-MGMT" USING WS-COMMAND WS-USERNAME WS-PASSWORD WS-MESSAGE
+
+                       MOVE WS-MESSAGE TO WS-LINE
+                       MOVE "WRITE" TO WS-COMMAND
+                       CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+
+                       IF WS-MESSAGE = "You have successfully logged in."
+                           CALL "INCOLLEGE-NAV"
+                       END-IF
+
+                  WHEN 2
+                       *> Username
+                       MOVE "READ" TO WS-COMMAND
+                       CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+                       IF WS-LINE = HIGH-VALUES
+                           MOVE 9 TO WS-CHOICE
+                           EXIT PERFORM
+                       ELSE
+                           MOVE WS-LINE(1:20) TO WS-USERNAME
+                       END-IF
+
+                       *> Password
+                       MOVE "READ" TO WS-COMMAND
+                       CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+                       IF WS-LINE = HIGH-VALUES
+                           MOVE 9 TO WS-CHOICE
+                           EXIT PERFORM
+                       ELSE
+                           MOVE WS-LINE(1:20) TO WS-PASSWORD
+                       END-IF
+
+                       MOVE "CREATE" TO WS-COMMAND
+                       CALL "ACCOUNT-MGMT" USING WS-COMMAND WS-USERNAME WS-PASSWORD WS-MESSAGE
+
+                       MOVE WS-MESSAGE TO WS-LINE
+                       MOVE "WRITE" TO WS-COMMAND
+                       CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+
+                  WHEN 9
+                       CONTINUE
+
+                  WHEN OTHER
+                       MOVE "Invalid choice. Please try again." TO WS-LINE
+                       MOVE "WRITE" TO WS-COMMAND
+                       CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+               END-EVALUATE
+           END-PERFORM
 
            MOVE "CLOSE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE

@@ -21,21 +21,26 @@
        01 IO-LINE    PIC X(80).
 
        PROCEDURE DIVISION USING IO-COMMAND IO-LINE.
-           EVALUATE IO-COMMAND
+           EVALUATE FUNCTION TRIM(IO-COMMAND)
               WHEN "OPEN"
                    OPEN INPUT INPUT-FILE
                    OPEN OUTPUT OUTPUT-FILE
+
               WHEN "CLOSE"
                    CLOSE INPUT-FILE
                    CLOSE OUTPUT-FILE
+
               WHEN "READ"
                    READ INPUT-FILE INTO IO-LINE
-                       AT END MOVE SPACES TO IO-LINE
+                       AT END
+                           MOVE HIGH-VALUES TO IO-LINE
                    END-READ
+
               WHEN "WRITE"
-                   DISPLAY IO-LINE
+                   DISPLAY FUNCTION TRIM(IO-LINE)
                    MOVE IO-LINE TO OUTPUT-REC
                    WRITE OUTPUT-REC
            END-EVALUATE
+
            GOBACK.
        END PROGRAM IO-MODULE.
