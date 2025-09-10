@@ -1,0 +1,88 @@
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Account created successfully.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Account created successfully.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Invalid password. Must be 8–12 chars, 1 uppercase, 1 digit, 1 special.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+
+Invalid password. Must be 8–12 chars, 1 uppercase, 1 digit, 1 special.
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Account created successfully.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Account created successfully.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Invalid password. Must be 8–12 chars, 1 uppercase, 1 digit, 1 special.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Invalid password. Must be 8–12 chars, 1 uppercase, 1 digit, 1 special.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Invalid password. Must be 8–12 chars, 1 uppercase, 1 digit, 1 special.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Username already exists.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+Account created successfully.
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+All permitted accounts have been created, please come back later
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+student12           Incorrect username/password, try again
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+student13           Incorrect username/password, try again
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+student1            You have successfully logged in. again
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+All permitted accounts have been created, please come back later
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account
+student14           Incorrect username/password, try again
+
+Welcome to InCollege!
+1. Log In
+2. Create New Account

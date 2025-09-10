@@ -1,0 +1,51 @@
+2 ##Valid account creation (working password #1) → confirm happy path works.
+student1
+Password1!
+2 ##Valid account creation (working password #2) → confirm more than one account can exist.
+student2
+Testing123!
+2 ##Too short password → negative.
+student3
+Test
+2 ##Too long password → negative.
+student4
+Testing123456
+2 ##Password exactly 8 characters → edge positive.
+student5
+Pass123#
+2 ##Password exactly 12 characters → edge positive.
+student6
+Testing123#!
+2 ##No capital letter → negative.
+student7
+password123
+2 ##No digit → negative.
+student8
+Password#!
+2 ##No special character → negative.
+student9
+Testing123
+2 ##Duplicate username (try to reuse one of the valid accounts from step 1–2) → negative.
+student1
+Password1!
+2 ##5th account creation
+student10
+Tester123#
+2 ##Too many accounts created 
+student11
+Account11#
+1 ##Login with incorrect password (existing user) → negative.
+student12
+ValidTest1!
+1 ##Login with nonexistent username → negative.
+student13
+toomany
+1 ##Persistence check (restart program and log in again with one of the earlier valid accounts) → confirm accounts are saved and reloaded.
+student1
+Password1!
+2 ##too many accounts 
+student2
+Testing123
+1 ##(nonexistent username, tied to login failure test)
+student14
+ValidTest1!
