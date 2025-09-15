@@ -4,7 +4,7 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT ACCOUNT-FILE ASSIGN TO "data/accounts.dat"
+           SELECT ACCOUNT-FILE ASSIGN TO "accounts.dat"
                ORGANIZATION IS LINE SEQUENTIAL.
 
        DATA DIVISION.
@@ -27,10 +27,18 @@
        01 AM-PASSWORD PIC X(20).
        01 AM-MESSAGE  PIC X(80).
 
+<<<<<<< HEAD
        PROCEDURE DIVISION USING AM-COMMAND AM-USERNAME AM-PASSWORD 
        AM-MESSAGE.
+=======
+       PROCEDURE DIVISION USING AM-COMMAND AM-USERNAME 
+       AM-PASSWORD AM-MESSAGE.
+      *display "In Account Management"
+
+>>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af
            EVALUATE AM-COMMAND
               WHEN "CREATE"
+              display "CREATE ACCOUNT"
                    *> Reset flags
                    MOVE "N" TO WS-DUPLICATE-FLAG
                    MOVE "N" TO WS-END-OF-FILE
@@ -92,7 +100,25 @@
                    MOVE "Account created successfully." TO AM-MESSAGE
 
               WHEN "LOGIN"
-                   CALL "LOGIN" USING AM-USERNAME AM-PASSWORD AM-MESSAGE
-           END-EVALUATE
+      *             OPEN INPUT ACCOUNT-FILE
+      *             PERFORM UNTIL WS-END-OF-FILE = "Y"
+      *                READ ACCOUNT-FILE
+      *                    AT END MOVE "Y" TO WS-END-OF-FILE
+      *                    NOT AT END
+      *                    display 'ACC-USERNAME' ACC-USERNAME
+
+      *                    display ACC-PASSWORD
+      *                    MOVE ACC-USERNAME TO AM-USERNAME
+      *                    MOVE ACC-PASSWORD TO AM-PASSWORD
+      *          display 'In AccountManagement'
+      *          display 'Username: ' AM-USERNAME
+      *          display 'Password: ' AM-PASSWORD
+                
+
+      *                END-READ
+      *             END-PERFORM
+      *             CLOSE ACCOUNT-FILE
+           CALL "LOGIN" USING AM-USERNAME AM-PASSWORD AM-MESSAGE
+              END-EVALUATE
            GOBACK.
        END PROGRAM ACCOUNT-MGMT.
