@@ -1,3 +1,41 @@
 Welcome to InCollege!
 1. Log In
 2. Create New Account
+9. Exit
+You have successfully logged in.
+User Profile Menu
+1. Create Profile
+2. Edit Profile
+3. View Profile
+4. Return to Main Menu
+First Name (Required):
+Last Name (Required):
+University/College Attended (Required):
+Major (Required):
+Graduation Year (Required):
+Invalid entry. Enter a valid 4 digit year
+Graduation Year (Required):
+About Me (Optional):
+Enter the number of job experiences you would like to enter (0-3)
+Experience: add up to 1 entries in the following format
+Title (e.g., Software Intern)
+Company/Organization (e.g., TechSolutions Inc.)
+Dates (e.g., Summer 2024 or Jan 2023- May 2024)
+Description (Optional, responsibilities/achievements)
+Enter Job Title:
+Enter Company:
+Enter Dates:
+Enter Job Description (Optional):
+Enter the number of educational background entries you would like to enter (0-3)
+Experience: add up to 1 entries in the following format
+Degree (e.g., Master of Science)
+University/College (e.g., State University)
+Years Attended (e.g., 2023-2025)
+Enter Degree:
+Enter University/College:
+Enter Years Attended:
+User Profile Menu
+1. Create Profile
+2. Edit Profile
+3. View Profile
+4. Return to Main Menu

@@ -27,8 +27,8 @@
        01 AM-PASSWORD PIC X(20).
        01 AM-MESSAGE  PIC X(80).
 
-       PROCEDURE DIVISION USING AM-COMMAND AM-USERNAME 
-       AM-PASSWORD AM-MESSAGE.
+       PROCEDURE DIVISION USING AM-COMMAND AM-USERNAME AM-PASSWORD 
+       AM-MESSAGE.
            EVALUATE AM-COMMAND
               WHEN "CREATE"
                    *> Reset flags
@@ -48,16 +48,16 @@
                    CLOSE ACCOUNT-FILE
 
                    IF WS-COUNT >= WS-LIMIT
-                     MOVE "All permitted accounts have been created, " &
-                        "please come back later"
-                      TO AM-MESSAGE
+                      MOVE "All permitted accounts have been created, "&
+                       "please come back later"
+                         TO AM-MESSAGE
                       GOBACK
                    END-IF
 
                    *> Validate password
                    CALL "UTILITIES" USING AM-PASSWORD WS-VALID-FLAG
                    IF WS-VALID-FLAG NOT = "Y"
-                      MOVE "Invalid password. Must be 8–12 chars, " &
+                      MOVE "Invalid password. Must be 8–12 chars, "& 
                       "1 uppercase, 1 digit, 1 special."
                          TO AM-MESSAGE
                       GOBACK

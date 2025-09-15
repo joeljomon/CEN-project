@@ -1,1 +1,21 @@
-
+1
+testuser1
+Password123!
+1
+FirstName
+LastName
+USF
+Computer Science
+2025
+Hello, this is the about me section.
+1
+Software Engineer
+Google
+Summer 2023
+In summer of 2023, I interned at Google as a Software Engineer.
+1
+Bachelor's Degree
+USF
+2023-2024
+4
+9
