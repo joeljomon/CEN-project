@@ -1,12 +1,5 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. LOGIN.
-<<<<<<< HEAD
-=======
-      *> This program handles the login logic of the InCollege
-      *> application. It prompts the user to enter their credentials,
-      *> validates them using the accounts file, then returns the 
-      *> appropriate success or failure message.
->>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af
 
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
@@ -27,13 +20,6 @@
        01  WS-ACCOUNT-FILE-STATUS   PIC XX.
        01  WS-DISPLAY-LINE          PIC X(80).
 
-<<<<<<< HEAD
-=======
-       01  WS-IO-COMMUNICATION.
-           05 WS-IO-COMMAND         PIC X(20) VALUE SPACES.
-           05 WS-IO-LINE            PIC X(80) VALUE SPACES.
-
->>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af
        01  WS-USER-INPUT.
            05 WS-USERNAME           PIC X(20).
            05 WS-PASSWORD           PIC X(20).
@@ -58,17 +44,8 @@
 
        PROCEDURE DIVISION USING LOGIN-USERNAME
                                 LOGIN-PASSWORD LOGIN-MESSAGE.
-<<<<<<< HEAD
 
       MAIN-PROCEDURE.
-=======
-      
-           MAIN-PROCEDURE.
-      *     display 'Inside Login Module'
-      *     display 'user' login-username
-      *     display 'pass' login-password
-           
->>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af
            PERFORM 1000-INITIALIZE.
            PERFORM 2000-LOGIN-ROUTINE. 
            
@@ -77,13 +54,9 @@
            GOBACK.
 
        1000-INITIALIZE.
-<<<<<<< HEAD
            MOVE LOGIN-USERNAME TO WS-USERNAME
            MOVE LOGIN-PASSWORD TO WS-PASSWORD
            OPEN INPUT USER-ACCOUNTS-FILE
-=======
-           OPEN INPUT USER-ACCOUNTS-FILE.
->>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af
 
            IF WS-ACCOUNT-FILE-STATUS = "00"
               PERFORM UNTIL WS-ACCOUNT-FILE-STATUS NOT = "00"
@@ -98,7 +71,6 @@
            END-IF
 
            CLOSE USER-ACCOUNTS-FILE.
-<<<<<<< HEAD
 
        2000-LOGIN-ROUTINE.
            MOVE 'N' TO WS-LOGIN-SUCCESS
@@ -118,37 +90,6 @@
                PERFORM 9000-DISPLAY-LINE
            END-PERFORM.
 
-=======
-      *     MOVE 'OPEN' TO WS-IO-COMMAND
-      *     CALL "IO-MODULE" USING WS-IO-COMMAND
-      *                         WS-IO-LINE.
-
-       
-      *> Main loop for login attempts
-       2000-LOGIN-ROUTINE.
-      *     display 'Inside 2000-LOGIN-ROUTINE'
-      
-              
-           MOVE 'N' TO WS-LOGIN-SUCCESS
-           MOVE LOGIN-USERNAME TO WS-USERNAME
-           MOVE LOGIN-PASSWORD TO WS-PASSWORD
-                   PERFORM 2100-VALIDATE-CREDENTIALS
-                   IF WS-LOGIN-SUCCESS = 'Y'
-              MOVE "You have successfully logged in."
-                         TO WS-DISPLAY-LINE
-                       PERFORM 9000-DISPLAY-AND-WRITE-LINE
-                   ELSE
-             MOVE WS-USERNAME "Incorrect username/password, try again" 
-                             TO WS-DISPLAY-LINE
-                       PERFORM 9000-DISPLAY-AND-WRITE-LINE
-                   END-IF
-            .
-
-            
-      *> VALIDATE THE CREDENTIALS
-      *>Searches the stored credentials for a matching username
-      *> and password
->>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af
        2100-VALIDATE-CREDENTIALS.
            MOVE 'N' TO WS-LOGIN-SUCCESS
            PERFORM VARYING I FROM 1 BY 1 UNTIL I > WS-USER-COUNT
@@ -162,16 +103,6 @@
            END-PERFORM.
     
 
-<<<<<<< HEAD
        9000-DISPLAY-LINE.
            MOVE WS-DISPLAY-LINE TO LOGIN-MESSAGE
            DISPLAY WS-DISPLAY-LINE.
-=======
-      *> Displays the message then sends to the calling program
-       9000-DISPLAY-AND-WRITE-LINE.
-           MOVE WS-DISPLAY-LINE TO LOGIN-MESSAGE.
-      *     display WS-DISPLAY-LINE.
-      *     CALL "IO-MODULE" USING 'WRITE' WS-DISPLAY-LINE.
-
-
->>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af

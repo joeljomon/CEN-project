@@ -4,15 +4,9 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-<<<<<<< HEAD
            SELECT INPUT-FILE ASSIGN TO "data/InCollege-Input.txt"
                ORGANIZATION IS LINE SEQUENTIAL.
            SELECT OUTPUT-FILE ASSIGN TO "data/InCollege-Output.txt"
-=======
-           SELECT INPUT-FILE ASSIGN TO "InCollege-Input.txt"
-               ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT OUTPUT-FILE ASSIGN TO "InCollege-Output.txt"
->>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af
                ORGANIZATION IS LINE SEQUENTIAL.
 
        DATA DIVISION.
