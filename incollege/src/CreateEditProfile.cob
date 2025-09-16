@@ -37,6 +37,10 @@
        77 WS-FOUND           PIC X VALUE "N".
        77 WS-COUNT           PIC 9(4) VALUE 0.
 
+       77 VALID-FIELD        PIC X VALUE "N".
+       77 VALID-GRAD-YEAR    PIC X VALUE "N".
+       77 TMP-GRAD-YEAR-STR  PIC X(4).
+
        01 WS-PROFILES.
           05 WS-PROFILE OCCURS 100 TIMES
              INDEXED BY IDX.
@@ -82,47 +86,100 @@
        MAIN-PROGRAM.
            MOVE CP-USERNAME TO TMP-USERNAME
 
-           *> First Name
-           MOVE "Enter First Name:" TO WS-LINE
-           PERFORM WRITE-LINE
-           MOVE SPACES TO WS-LINE
-           PERFORM READ-LINE
-           MOVE WS-LINE(1:20) TO TMP-FIRST-NAME
+           *> First Name (validation)
+           PERFORM UNTIL VALID-FIELD = "Y"
+               MOVE "Enter First Name:" TO WS-LINE
+               PERFORM WRITE-LINE
+               MOVE SPACES TO WS-LINE
+               PERFORM READ-LINE
+               MOVE WS-LINE(1:20) TO TMP-FIRST-NAME
+               IF FUNCTION LENGTH(FUNCTION TRIM(TMP-FIRST-NAME)) = 0
+                   MOVE "First name cannot be blank." TO WS-LINE
+                   PERFORM WRITE-LINE
+               ELSE
+                   MOVE "Y" TO VALID-FIELD
+               END-IF
+           END-PERFORM
+           MOVE "N" TO VALID-FIELD
 
-           *> Last Name
-           MOVE "Enter Last Name:" TO WS-LINE
-           PERFORM WRITE-LINE
-           MOVE SPACES TO WS-LINE
-           PERFORM READ-LINE
-           MOVE WS-LINE(1:20) TO TMP-LAST-NAME
+           *> Last Name (validation)
+           PERFORM UNTIL VALID-FIELD = "Y"
+               MOVE "Enter Last Name:" TO WS-LINE
+               PERFORM WRITE-LINE
+               MOVE SPACES TO WS-LINE
+               PERFORM READ-LINE
+               MOVE WS-LINE(1:20) TO TMP-LAST-NAME
+               IF FUNCTION LENGTH(FUNCTION TRIM(TMP-LAST-NAME)) = 0
+                   MOVE "Last name cannot be blank." TO WS-LINE
+                   PERFORM WRITE-LINE
+               ELSE
+                   MOVE "Y" TO VALID-FIELD
+               END-IF
+           END-PERFORM
+           MOVE "N" TO VALID-FIELD
 
-           *> University
-           MOVE "Enter University/College Attended:" TO WS-LINE
-           PERFORM WRITE-LINE
-           MOVE SPACES TO WS-LINE
-           PERFORM READ-LINE
-           MOVE WS-LINE(1:50) TO TMP-UNIVERSITY
+           *> University (validation)
+           PERFORM UNTIL VALID-FIELD = "Y"
+               MOVE "Enter University/College Attended:" TO WS-LINE
+               PERFORM WRITE-LINE
+               MOVE SPACES TO WS-LINE
+               PERFORM READ-LINE
+               MOVE WS-LINE(1:50) TO TMP-UNIVERSITY
+               IF FUNCTION LENGTH(FUNCTION TRIM(TMP-UNIVERSITY)) = 0
+                   MOVE "University/College cannot be blank." TO WS-LINE
+                   PERFORM WRITE-LINE
+               ELSE
+                   MOVE "Y" TO VALID-FIELD
+               END-IF
+           END-PERFORM
+           MOVE "N" TO VALID-FIELD
 
-           *> Major
-           MOVE "Enter Major:" TO WS-LINE
-           PERFORM WRITE-LINE
-           MOVE SPACES TO WS-LINE
-           PERFORM READ-LINE
-           MOVE WS-LINE(1:50) TO TMP-MAJOR
+           *> Major (validation)
+           PERFORM UNTIL VALID-FIELD = "Y"
+               MOVE "Enter Major:" TO WS-LINE
+               PERFORM WRITE-LINE
+               MOVE SPACES TO WS-LINE
+               PERFORM READ-LINE
+               MOVE WS-LINE(1:50) TO TMP-MAJOR
+               IF FUNCTION LENGTH(FUNCTION TRIM(TMP-MAJOR)) = 0
+                   MOVE "Major cannot be blank." TO WS-LINE
+                   PERFORM WRITE-LINE
+               ELSE
+                   MOVE "Y" TO VALID-FIELD
+               END-IF
+           END-PERFORM
+           MOVE "N" TO VALID-FIELD
 
-           *> Graduation Year
-           MOVE "Enter Graduation Year (4 digits, e.g., 2025):" TO WS-LINE
-           PERFORM WRITE-LINE
-           MOVE SPACES TO WS-LINE
-           PERFORM READ-LINE
-           MOVE FUNCTION NUMVAL(WS-LINE(1:4)) TO TMP-GRAD-YEAR
+           *> Graduation Year (validation: numeric, 4-digits, 1900-2100)
+           PERFORM UNTIL VALID-GRAD-YEAR = "Y"
+               MOVE "Enter Graduation Year (4 digits, e.g., 2025):" TO WS-LINE
+               PERFORM WRITE-LINE
+               MOVE SPACES TO WS-LINE
+               PERFORM READ-LINE
+               MOVE WS-LINE(1:4) TO TMP-GRAD-YEAR-STR
+               IF TMP-GRAD-YEAR-STR NUMERIC
+                  AND LENGTH OF FUNCTION TRIM(TMP-GRAD-YEAR-STR) = 4
+                  AND FUNCTION NUMVAL(TMP-GRAD-YEAR-STR) >= 1900
+                  AND FUNCTION NUMVAL(TMP-GRAD-YEAR-STR) <= 2100
+                   MOVE FUNCTION NUMVAL(TMP-GRAD-YEAR-STR) TO TMP-GRAD-YEAR
+                   MOVE "Y" TO VALID-GRAD-YEAR
+               ELSE
+                   MOVE "Graduation year must be a 4-digit number between 1900 and 2100." TO WS-LINE
+                   PERFORM WRITE-LINE
+               END-IF
+           END-PERFORM
+           MOVE "N" TO VALID-GRAD-YEAR
 
-           *> About Me (Optional)
+           *> About Me (optional)
            MOVE "Enter About Me (short, optional):" TO WS-LINE
            PERFORM WRITE-LINE
            MOVE SPACES TO WS-LINE
            PERFORM READ-LINE
-           MOVE WS-LINE(1:200) TO TMP-ABOUT
+           IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:200))) = 0
+               MOVE SPACES TO TMP-ABOUT
+           ELSE
+               MOVE WS-LINE(1:200) TO TMP-ABOUT
+           END-IF
 
            *> Experience (Optional, up to 3)
            MOVE 0 TO EXP-COUNT
@@ -140,25 +197,41 @@
                PERFORM WRITE-LINE
                MOVE SPACES TO WS-LINE
                PERFORM READ-LINE
-               MOVE WS-LINE(1:30) TO TMP-EXP-TITLE(IDX2)
+               IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:30))) = 0
+                   MOVE SPACES TO TMP-EXP-TITLE(IDX2)
+               ELSE
+                   MOVE WS-LINE(1:30) TO TMP-EXP-TITLE(IDX2)
+               END-IF
 
                MOVE "  > Company/Organization:" TO WS-LINE
                PERFORM WRITE-LINE
                MOVE SPACES TO WS-LINE
                PERFORM READ-LINE
-               MOVE WS-LINE(1:30) TO TMP-EXP-COMPANY(IDX2)
+               IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:30))) = 0
+                   MOVE SPACES TO TMP-EXP-COMPANY(IDX2)
+               ELSE
+                   MOVE WS-LINE(1:30) TO TMP-EXP-COMPANY(IDX2)
+               END-IF
 
                MOVE "  > Dates (e.g., Summer 2024):" TO WS-LINE
                PERFORM WRITE-LINE
                MOVE SPACES TO WS-LINE
                PERFORM READ-LINE
-               MOVE WS-LINE(1:30) TO TMP-EXP-DATES(IDX2)
+               IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:30))) = 0
+                   MOVE SPACES TO TMP-EXP-DATES(IDX2)
+               ELSE
+                   MOVE WS-LINE(1:30) TO TMP-EXP-DATES(IDX2)
+               END-IF
 
                MOVE "  > Description (optional):" TO WS-LINE
                PERFORM WRITE-LINE
                MOVE SPACES TO WS-LINE
                PERFORM READ-LINE
-               MOVE WS-LINE(1:100) TO TMP-EXP-DESC(IDX2)
+               IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:100))) = 0
+                   MOVE SPACES TO TMP-EXP-DESC(IDX2)
+               ELSE
+                   MOVE WS-LINE(1:100) TO TMP-EXP-DESC(IDX2)
+               END-IF
            END-PERFORM
 
            *> Education (Optional, up to 3)
@@ -177,19 +250,31 @@
                PERFORM WRITE-LINE
                MOVE SPACES TO WS-LINE
                PERFORM READ-LINE
-               MOVE WS-LINE(1:30) TO TMP-EDU-DEGREE(IDX2)
+               IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:30))) = 0
+                   MOVE SPACES TO TMP-EDU-DEGREE(IDX2)
+               ELSE
+                   MOVE WS-LINE(1:30) TO TMP-EDU-DEGREE(IDX2)
+               END-IF
 
                MOVE "  > University/College:" TO WS-LINE
                PERFORM WRITE-LINE
                MOVE SPACES TO WS-LINE
                PERFORM READ-LINE
-               MOVE WS-LINE(1:50) TO TMP-EDU-SCHOOL(IDX2)
+               IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:50))) = 0
+                   MOVE SPACES TO TMP-EDU-SCHOOL(IDX2)
+               ELSE
+                   MOVE WS-LINE(1:50) TO TMP-EDU-SCHOOL(IDX2)
+               END-IF
 
                MOVE "  > Years Attended (e.g., 2023-2025):" TO WS-LINE
                PERFORM WRITE-LINE
                MOVE SPACES TO WS-LINE
                PERFORM READ-LINE
-               MOVE WS-LINE(1:20) TO TMP-EDU-YEARS(IDX2)
+               IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:20))) = 0
+                   MOVE SPACES TO TMP-EDU-YEARS(IDX2)
+               ELSE
+                   MOVE WS-LINE(1:20) TO TMP-EDU-YEARS(IDX2)
+               END-IF
            END-PERFORM
 
            *> Load all profiles

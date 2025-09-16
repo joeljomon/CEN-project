@@ -58,35 +58,35 @@ Main Menu:
 Enter your choice:
 You Chose to view your profile.
 ========== Your Profile ==========
-Name: Ayush Title
-University: USF12
-Major: Computer Science
-Graduation Year: 2025
-About:
+> Name: Ayush Title
+> University: USF12
+> Major: Computer Science
+> Graduation Year: 2025
+> About:
 I am good
-Experience:
-  Title: Software Intern
-    Company: Tech Solutions Inc.
-    Dates: Summer 2024
-    Description: Worked on backend APIs.
-  Title: Research Assistant
-    Company: State University
-    Dates: Sep 2023 - May 2024
-    Description: Assisted in data analysis for ML project.
-  Title: Project Lead
-    Company: Open Source Org
-    Dates: 2022
-    Description: Led a team for open source contributions.
-Education:
-  Degree: Bachelor of Science
-    School: USF12
-    Years: 2021-2025
-  Degree: Master of Science
-    School: State University
-    Years: 2025-2027
-  Degree: Diploma in Computing
-    School: Community College
-    Years: 2019-2021
+> Experience:
+>>    Title: Software Intern
+>>       Company: Tech Solutions Inc.
+>>       Dates: Summer 2024
+>>       Description: Worked on backend APIs.
+>>    Title: Research Assistant
+>>       Company: State University
+>>       Dates: Sep 2023 - May 2024
+>>       Description: Assisted in data analysis for ML project.
+>>    Title: Project Lead
+>>       Company: Open Source Org
+>>       Dates: 2022
+>>       Description: Led a team for open source contributions.
+> Education:
+>>    Degree: Bachelor of Science
+>>       School: USF12
+>>       Years: 2021-2025
+>>    Degree: Master of Science
+>>       School: State University
+>>       Years: 2025-2027
+>>    Degree: Diploma in Computing
+>>       School: Community College
+>>       Years: 2019-2021
 ==================================
 Main Menu:
 1. Create/Edit User Profile

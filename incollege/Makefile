@@ -8,7 +8,7 @@ $(PROGRAM): $(SRC)
 	cobc -x -free -o $@ $(SRC)
 
 run: all
-	./$(PROGRAM)
+	-./$(PROGRAM)
 
 clean:
-	rm -f bin/* 
+	rm -f bin/*

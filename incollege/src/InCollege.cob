@@ -106,6 +106,8 @@
 
                   WHEN 9
                        MOVE " =============== Thank you for using InCollege! ================= " TO WS-LINE
+                       MOVE "WRITE" TO WS-COMMAND
+                       CALL "IO-MODULE" USING WS-COMMAND WS-LINE
                        CONTINUE
 
                   WHEN OTHER
@@ -118,6 +120,6 @@
            MOVE "CLOSE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
-           STOP RUN.
+           GOBACK.
        END PROGRAM INCOLLEGE.
        

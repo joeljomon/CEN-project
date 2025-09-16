@@ -81,7 +81,7 @@
                               MOVE PROF-ABOUT TO WS-TMP-ABOUT
 
                               MOVE SPACES TO WS-LINE
-                              STRING "Name: " DELIMITED BY SIZE
+                              STRING "> Name: " DELIMITED BY SIZE
                                      FUNCTION TRIM(WS-TMP-FIRST-NAME) DELIMITED BY SIZE
                                      " " DELIMITED BY SIZE
                                      FUNCTION TRIM(WS-TMP-LAST-NAME) DELIMITED BY SIZE
@@ -90,65 +90,65 @@
                               PERFORM WRITE-LINE
 
                               MOVE SPACES TO WS-LINE
-                              STRING "University: " DELIMITED BY SIZE
+                              STRING "> University: " DELIMITED BY SIZE
                                      FUNCTION TRIM(WS-TMP-UNIVERSITY) DELIMITED BY SIZE
                                      INTO WS-LINE
                               END-STRING
                               PERFORM WRITE-LINE
 
                               MOVE SPACES TO WS-LINE
-                              STRING "Major: " DELIMITED BY SIZE
+                              STRING "> Major: " DELIMITED BY SIZE
                                      FUNCTION TRIM(WS-TMP-MAJOR) DELIMITED BY SIZE
                                      INTO WS-LINE
                               END-STRING
                               PERFORM WRITE-LINE
 
                               MOVE SPACES TO WS-LINE
-                              STRING "Graduation Year: " DELIMITED BY SIZE
+                              STRING "> Graduation Year: " DELIMITED BY SIZE
                                      WS-TMP-GRAD-YEAR DELIMITED BY SIZE
                                      INTO WS-LINE
                               END-STRING
                               PERFORM WRITE-LINE
 
                               MOVE SPACES TO WS-LINE
-                              MOVE "About: " TO WS-LINE
+                              MOVE "> About: " TO WS-LINE
                               PERFORM WRITE-LINE
 
                               MOVE WS-TMP-ABOUT TO WS-LINE
                               PERFORM WRITE-LINE
 
-                              MOVE "Experience:" TO WS-LINE
+                              MOVE "> Experience:" TO WS-LINE
                               PERFORM WRITE-LINE
                               PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX > 3
                                   MOVE PROF-EXP-TITLE(WS-IDX) TO WS-TMP-EXP-TITLE
-                                  IF FUNCTION TRIM(WS-TMP-EXP-TITLE) NOT = ""
+                                  IF FUNCTION LENGTH(FUNCTION TRIM(WS-TMP-EXP-TITLE)) > 0
                                      MOVE PROF-EXP-COMPANY(WS-IDX) TO WS-TMP-EXP-COMPANY
                                      MOVE PROF-EXP-DATES(WS-IDX)   TO WS-TMP-EXP-DATES
                                      MOVE PROF-EXP-DESC(WS-IDX)    TO WS-TMP-EXP-DESC
 
                                      MOVE SPACES TO WS-LINE
-                                     STRING "  Title: " DELIMITED BY SIZE
+                                     STRING ">>    Title: " DELIMITED BY SIZE
                                             FUNCTION TRIM(WS-TMP-EXP-TITLE) DELIMITED BY SIZE
                                             INTO WS-LINE
                                      END-STRING
                                      PERFORM WRITE-LINE
 
                                      MOVE SPACES TO WS-LINE
-                                     STRING "    Company: " DELIMITED BY SIZE
+                                     STRING ">>       Company: " DELIMITED BY SIZE
                                             FUNCTION TRIM(WS-TMP-EXP-COMPANY) DELIMITED BY SIZE
                                             INTO WS-LINE
                                      END-STRING
                                      PERFORM WRITE-LINE
 
                                      MOVE SPACES TO WS-LINE
-                                     STRING "    Dates: " DELIMITED BY SIZE
+                                     STRING ">>       Dates: " DELIMITED BY SIZE
                                             FUNCTION TRIM(WS-TMP-EXP-DATES) DELIMITED BY SIZE
                                             INTO WS-LINE
                                      END-STRING
                                      PERFORM WRITE-LINE
 
                                      MOVE SPACES TO WS-LINE
-                                     STRING "    Description: " DELIMITED BY SIZE
+                                     STRING ">>       Description: " DELIMITED BY SIZE
                                             FUNCTION TRIM(WS-TMP-EXP-DESC) DELIMITED BY SIZE
                                             INTO WS-LINE
                                      END-STRING
@@ -156,30 +156,30 @@
                                   END-IF
                               END-PERFORM
 
-                              MOVE "Education:" TO WS-LINE
+                              MOVE "> Education:" TO WS-LINE
                               PERFORM WRITE-LINE
                               PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX > 3
                                   MOVE PROF-EDU-DEGREE(WS-IDX) TO WS-TMP-EDU-DEGREE
-                                  IF FUNCTION TRIM(WS-TMP-EDU-DEGREE) NOT = ""
+                                  IF FUNCTION LENGTH(FUNCTION TRIM(WS-TMP-EDU-DEGREE)) > 0
                                      MOVE PROF-EDU-SCHOOL(WS-IDX) TO WS-TMP-EDU-SCHOOL
                                      MOVE PROF-EDU-YEARS(WS-IDX)  TO WS-TMP-EDU-YEARS
 
                                      MOVE SPACES TO WS-LINE
-                                     STRING "  Degree: " DELIMITED BY SIZE
+                                     STRING ">>    Degree: " DELIMITED BY SIZE
                                             FUNCTION TRIM(WS-TMP-EDU-DEGREE) DELIMITED BY SIZE
                                             INTO WS-LINE
                                      END-STRING
                                      PERFORM WRITE-LINE
 
                                      MOVE SPACES TO WS-LINE
-                                     STRING "    School: " DELIMITED BY SIZE
+                                     STRING ">>       School: " DELIMITED BY SIZE
                                             FUNCTION TRIM(WS-TMP-EDU-SCHOOL) DELIMITED BY SIZE
                                             INTO WS-LINE
                                      END-STRING
                                      PERFORM WRITE-LINE
 
                                      MOVE SPACES TO WS-LINE
-                                     STRING "    Years: " DELIMITED BY SIZE
+                                     STRING ">>       Years: " DELIMITED BY SIZE
                                             FUNCTION TRIM(WS-TMP-EDU-YEARS) DELIMITED BY SIZE
                                             INTO WS-LINE
                                      END-STRING
@@ -200,7 +200,7 @@
 
            IF WS-FOUND = "N"
               MOVE SPACES TO WS-LINE
-              MOVE "No profile found for this user." TO WS-LINE
+              MOVE "! No profile found for this user." TO WS-LINE
               PERFORM WRITE-LINE
            END-IF
 
@@ -210,3 +210,4 @@
            MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
        END PROGRAM VIEW-PROFILE.
+       

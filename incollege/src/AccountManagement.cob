@@ -67,7 +67,7 @@
                       READ ACCOUNT-FILE
                           AT END MOVE "Y" TO WS-END-OF-FILE
                           NOT AT END
-                              IF ACC-USERNAME = AM-USERNAME
+                              IF FUNCTION TRIM(ACC-USERNAME) = FUNCTION TRIM(AM-USERNAME)
                                  MOVE "Y" TO WS-DUPLICATE-FLAG
                               END-IF
                       END-READ
