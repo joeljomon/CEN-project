@@ -1,5 +1,5 @@
 PROGRAM=bin/InCollege
-SRC=src/InCollege.cob src/IO.cob src/AccountManagement.cob src/Utilities.cob src/login.cob src/Navigation.cob
+SRC=src/InCollege.cob src/IO.cob src/AccountManagement.cob src/Utilities.cob src/login.cob src/Navigation.cob src/SkillMenu.cob src/CreateEditProfile.cob src/ViewProfile.cob
 
 all: $(PROGRAM)
 
@@ -11,4 +11,4 @@ run: all
 	./$(PROGRAM)
 
 clean:
-	rm -f bin/* data/InCollege-Output.txt data/accounts.dat
+	rm -f bin/* 

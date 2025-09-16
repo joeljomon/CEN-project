@@ -16,8 +16,9 @@
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
            PERFORM UNTIL WS-CHOICE = 9
-               MOVE "Welcome to InCollege!" TO WS-LINE
+               MOVE " ================ Welcome to InCollege! ===================== " TO WS-LINE
                MOVE "WRITE" TO WS-COMMAND
+
                CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
                MOVE "1. Log In" TO WS-LINE
@@ -71,8 +72,8 @@
                        MOVE "WRITE" TO WS-COMMAND
                        CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
-                       IF WS-MESSAGE = "You have successfully logged in."
-                           CALL "INCOLLEGE-NAV"
+                       IF WS-MESSAGE = "================ You have successfully logged in. ==================="
+                           CALL "INCOLLEGE-NAV" USING WS-USERNAME
                        END-IF
 
                   WHEN 2
@@ -104,10 +105,11 @@
                        CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
                   WHEN 9
+                       MOVE " =============== Thank you for using InCollege! ================= " TO WS-LINE
                        CONTINUE
 
                   WHEN OTHER
-                       MOVE "Invalid choice. Please try again." TO WS-LINE
+                       MOVE " =============== Invalid choice. Please try again. ================= " TO WS-LINE
                        MOVE "WRITE" TO WS-COMMAND
                        CALL "IO-MODULE" USING WS-COMMAND WS-LINE
                END-EVALUATE
@@ -118,3 +120,4 @@
 
            STOP RUN.
        END PROGRAM INCOLLEGE.
+       

@@ -79,9 +79,9 @@
                ADD 1 TO WS-ATTEMPTS
                PERFORM 2100-VALIDATE-CREDENTIALS
                IF WS-LOGIN-SUCCESS = 'Y'
-                   MOVE "You have successfully logged in." TO WS-DISPLAY-LINE
+                   MOVE "================ You have successfully logged in. ===================" TO WS-DISPLAY-LINE
                ELSE
-                   MOVE "Incorrect username/password, please try again" TO WS-DISPLAY-LINE
+                   MOVE " ==================== Incorrect username/password, please try again ====================" TO WS-DISPLAY-LINE
                END-IF
                PERFORM 9000-DISPLAY-LINE
            END-PERFORM.
