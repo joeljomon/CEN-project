@@ -70,7 +70,13 @@
                               MOVE "Y" TO WS-FOUND
 
                               MOVE SPACES TO WS-LINE
-                              MOVE "========== Your Profile ==========" TO WS-LINE
+                              STRING "========== Profile for: " DELIMITED BY SIZE
+                                     FUNCTION TRIM(PROF-FIRST-NAME) DELIMITED BY SIZE
+                                     " " DELIMITED BY SIZE
+                                     FUNCTION TRIM(PROF-LAST-NAME) DELIMITED BY SIZE
+                                     " ==========" DELIMITED BY SIZE
+                                     INTO WS-LINE
+                              END-STRING
                               PERFORM WRITE-LINE
 
                               MOVE PROF-FIRST-NAME TO WS-TMP-FIRST-NAME
@@ -210,4 +216,3 @@
            MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
        END PROGRAM VIEW-PROFILE.
-       

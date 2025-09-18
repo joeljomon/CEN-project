@@ -1,5 +1,5 @@
 PROGRAM=bin/InCollege
-SRC=src/InCollege.cob src/IO.cob src/AccountManagement.cob src/Utilities.cob src/login.cob src/Navigation.cob src/SkillMenu.cob src/CreateEditProfile.cob src/ViewProfile.cob
+SRC=src/InCollege.cob src/IO.cob src/AccountManagement.cob src/Utilities.cob src/login.cob src/Navigation.cob src/SkillMenu.cob src/CreateEditProfile.cob src/ViewProfile.cob src/SearchUser.cob
 
 all: $(PROGRAM)
 

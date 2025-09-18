@@ -41,6 +41,11 @@
        77 VALID-GRAD-YEAR    PIC X VALUE "N".
        77 TMP-GRAD-YEAR-STR  PIC X(4).
 
+       77 WS-LINE-LEN        PIC 9(3) VALUE 0.
+       77 WS-ROOM            PIC 9(3) VALUE 0.
+       77 WS-TMP-SPACE       PIC 9 VALUE 0.
+       77 WS-LINE-PART       PIC X(200).
+
        01 WS-PROFILES.
           05 WS-PROFILE OCCURS 100 TIMES
              INDEXED BY IDX.
@@ -170,16 +175,82 @@
            END-PERFORM
            MOVE "N" TO VALID-GRAD-YEAR
 
-           *> About Me (optional)
-           MOVE "Enter About Me (short, optional):" TO WS-LINE
+           *> About Me (multi-line, up to 200 chars, terminated by DONE, blank lines skipped)
+           MOVE SPACES TO TMP-ABOUT
+           MOVE 0 TO WS-COUNT
+           MOVE "Enter About Me. Type 'DONE' on a new line to finish (max 200 chars):" TO WS-LINE
            PERFORM WRITE-LINE
-           MOVE SPACES TO WS-LINE
-           PERFORM READ-LINE
-           IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE(1:200))) = 0
-               MOVE SPACES TO TMP-ABOUT
-           ELSE
-               MOVE WS-LINE(1:200) TO TMP-ABOUT
-           END-IF
+
+           PERFORM UNTIL WS-COUNT >= 200
+               MOVE SPACES TO WS-LINE
+               PERFORM READ-LINE
+               IF FUNCTION UPPER-CASE(FUNCTION TRIM(WS-LINE)) = "DONE"
+                   EXIT PERFORM
+               END-IF
+               IF FUNCTION LENGTH(FUNCTION TRIM(WS-LINE)) = 0
+                   CONTINUE
+               ELSE
+                   IF WS-COUNT > 0
+                       MOVE 1 TO WS-TMP-SPACE
+                   ELSE
+                       MOVE 0 TO WS-TMP-SPACE
+                   END-IF
+                   COMPUTE WS-LINE-LEN = LENGTH OF FUNCTION TRIM(WS-LINE)
+                   IF WS-COUNT + WS-TMP-SPACE + WS-LINE-LEN > 200
+                       COMPUTE WS-ROOM = 200 - WS-COUNT - WS-TMP-SPACE
+                       IF WS-ROOM > 0
+                           IF WS-ROOM > 0
+                               IF WS-COUNT > 0
+                                   MOVE SPACES TO WS-LINE-PART
+                                   IF WS-ROOM > 0
+                                       MOVE WS-LINE(1:WS-ROOM) TO WS-LINE-PART
+                                   ELSE
+                                       MOVE SPACES TO WS-LINE-PART
+                                   END-IF
+                                   STRING
+                                       TMP-ABOUT DELIMITED BY SIZE
+                                       " "      DELIMITED BY SIZE
+                                       WS-LINE-PART DELIMITED BY SIZE
+                                       INTO TMP-ABOUT
+                                   END-STRING
+                               ELSE
+                                   MOVE SPACES TO WS-LINE-PART
+                                   IF WS-ROOM > 0
+                                       MOVE WS-LINE(1:WS-ROOM) TO WS-LINE-PART
+                                   ELSE
+                                       MOVE SPACES TO WS-LINE-PART
+                                   END-IF
+                                   STRING
+                                       WS-LINE-PART DELIMITED BY SIZE
+                                       INTO TMP-ABOUT
+                                   END-STRING
+                               END-IF
+                               COMPUTE WS-COUNT = 200
+                           END-IF
+                       END-IF
+                       MOVE "About Me field reached maximum length (200 characters)." TO WS-LINE
+                       PERFORM WRITE-LINE
+                       EXIT PERFORM
+                   ELSE
+                       IF WS-COUNT > 0
+                           STRING
+                               TMP-ABOUT DELIMITED BY SIZE
+                               " "      DELIMITED BY SIZE
+                               WS-LINE  DELIMITED BY SIZE
+                               INTO TMP-ABOUT
+                           END-STRING
+                           COMPUTE WS-COUNT = WS-COUNT + 1 + WS-LINE-LEN
+                       ELSE
+                           STRING
+                               WS-LINE  DELIMITED BY SIZE
+                               INTO TMP-ABOUT
+                           END-STRING
+                           COMPUTE WS-COUNT = WS-LINE-LEN
+                       END-IF
+                   END-IF
+               END-IF
+           END-PERFORM
+           MOVE TMP-ABOUT TO PROF-ABOUT
 
            *> Experience (Optional, up to 3)
            MOVE 0 TO EXP-COUNT
@@ -398,5 +469,5 @@
        READ-LINE.
            MOVE "READ" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
+
        END PROGRAM CREATE-EDIT-PROFILE.
-       

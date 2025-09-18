@@ -16,7 +16,7 @@
        PROCEDURE DIVISION USING NAV-USERNAME.
        MAIN-PROGRAM.
            MOVE NAV-USERNAME TO WS-USERNAME
-           PERFORM UNTIL WS-CHOICE = 4
+           PERFORM UNTIL WS-CHOICE = 5
                PERFORM SHOW-MENU
                PERFORM GET-VALID-MAIN-CHOICE
                PERFORM PROCESS-CHOICE
@@ -30,9 +30,11 @@
            PERFORM WRITE-BOTH
            MOVE "2. View User Profile" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
-           MOVE "3. Learn a new skill" TO WS-OUTPUT-LINE
+           MOVE "3. Search for User"  TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
-           MOVE "4. Log Out" TO WS-OUTPUT-LINE
+           MOVE "4. Learn a new skill" TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
+           MOVE "5. Log Out" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
            MOVE "Enter your choice:" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH.
@@ -55,6 +57,16 @@
                    PERFORM WRITE-BOTH
                    CALL "VIEW-PROFILE" USING WS-USERNAME
                WHEN 3
+                   MOVE "You chose to search for a user."
+                       TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+                   MOVE "================== Search for User ==================="
+                       TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+
+                   CALL "SEARCH-USER"
+
+               WHEN 4
                    MOVE "You chose to learn a new skill."
                        TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
@@ -63,17 +75,16 @@
                    PERFORM WRITE-BOTH
                    CALL "SKILL-MENU"
 
-               WHEN 4
-                   MOVE "Logging out is under construction"
-                       TO WS-OUTPUT-LINE
+               WHEN 5
+                   MOVE "Logging out. Goodbye!" TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
            END-EVALUATE.
 
        GET-VALID-MAIN-CHOICE.
            MOVE 0 TO WS-CHOICE
-           PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 4
+           PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 5
                PERFORM GET-CHOICE
-               IF WS-CHOICE < 1 OR WS-CHOICE > 4
+               IF WS-CHOICE < 1 OR WS-CHOICE > 5
                    MOVE "Invalid choice. Please try again."
                        TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
@@ -84,7 +95,7 @@
            MOVE "READ" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE
            IF WS-LINE = HIGH-VALUES
-               MOVE 4 TO WS-CHOICE
+               MOVE 5 TO WS-CHOICE
            ELSE
                MOVE FUNCTION NUMVAL(WS-LINE(1:1)) TO WS-CHOICE
            END-IF.
