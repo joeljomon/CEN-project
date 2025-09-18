@@ -1,9 +1,15 @@
-# InCollege COBOL Project
+# InCollege COBOL Project - EPIC 2
 
 ## What it supports currently
 
-- Input in `data/incollege-input.txt` making sure `data/incollege-output.txt` and `data/accounts.dat` exist
+- Input in `data/incollege-input.txt` making sure `data/incollege-output.txt`, `data/accounts.dat`, `data/profiles.dat` exist
 - It will create upto 5 users with password policy enforcement of >8 and <=12 chars, 1 digit, speacial and UPPER req
+- Each user can create a profile
+- One user cannot create multiple profiles with same username
+- All fields in profile creation have input validation
+
+- All data is stored in `data/accounts.dat` and `data/profiles.dat`
+- Data persists even when the program is restarted
 
 ## Folder Structure
 

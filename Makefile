@@ -1,13 +1,14 @@
 PROGRAM=bin/InCollege
-SRC=src/InCollege.cob src/IO.cob src/AccountManagement.cob src/Utilities.cob
+SRC=src/InCollege.cob src/IO.cob src/AccountManagement.cob src/Utilities.cob src/login.cob src/Navigation.cob src/SkillMenu.cob src/CreateEditProfile.cob src/ViewProfile.cob src/SearchUser.cob
 
 all: $(PROGRAM)
 
 $(PROGRAM): $(SRC)
+	mkdir -p bin
 	cobc -x -free -o $@ $(SRC)
 
 run: all
-	./$(PROGRAM)
+	-./$(PROGRAM)
 
 clean:
-	rm -f bin/* data/InCollege-Output.txt data/accounts.dat
+	rm -f bin/*

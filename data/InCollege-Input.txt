@@ -1,1 +1,50 @@
-
+2
+testuser1
+Password123!
+1
+testuser1
+Password123!
+1
+Ayush
+Title
+USF12
+Computer Science
+2025
+I am good
+I am happy
+This is multi line
+DONE
+Y
+Software Intern
+Tech Solutions Inc.
+Summer 2024
+Worked on backend APIs.
+Y
+Research Assistant
+State University
+Sep 2023 - May 2024
+Assisted in data analysis for ML project.
+Y
+Project Lead
+Open Source Org
+2022
+Led a team for open source contributions.
+Y
+Bachelor of Science
+USF12
+2021-2025
+Y
+Master of Science
+State University
+2025-2027
+Y
+Diploma in Computing
+Community College
+2019-2021
+2
+3
+Ayush
+Title
+3
+Ayush
+Titl
