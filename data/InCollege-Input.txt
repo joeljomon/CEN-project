@@ -1,3 +1,26 @@
+<<<<<<< HEAD
+1
+testuser1
+Password123!
+1
+FirstName
+LastName
+USF
+Computer Science
+2025
+Hello, this is the about me section.
+1
+Software Engineer
+Google
+Summer 2023
+In summer of 2023, I interned at Google as a Software Engineer.
+1
+Bachelor's Degree
+USF
+2023-2024
+4
+9
+=======
 2 ##Valid account creation (working password #1) → confirm happy path works.
 student1
 Password1!
@@ -49,3 +72,4 @@ Testing123
 1 ##(nonexistent username, tied to login failure test)
 student14
 ValidTest1!
+>>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af

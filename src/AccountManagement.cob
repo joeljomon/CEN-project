@@ -27,8 +27,15 @@
        01 AM-PASSWORD PIC X(20).
        01 AM-MESSAGE  PIC X(80).
 
+<<<<<<< HEAD
        PROCEDURE DIVISION USING AM-COMMAND AM-USERNAME AM-PASSWORD 
        AM-MESSAGE.
+=======
+       PROCEDURE DIVISION USING AM-COMMAND AM-USERNAME 
+       AM-PASSWORD AM-MESSAGE.
+      *display "In Account Management"
+
+>>>>>>> 502ab5ff803384ab8c56f0762403ee243db0e5af
            EVALUATE AM-COMMAND
               WHEN "CREATE"
               display "CREATE ACCOUNT"
