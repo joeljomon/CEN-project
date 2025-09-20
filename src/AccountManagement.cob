@@ -4,7 +4,7 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT ACCOUNT-FILE ASSIGN TO "accounts.dat"
+           SELECT ACCOUNT-FILE ASSIGN TO "data/accounts.dat"
                ORGANIZATION IS LINE SEQUENTIAL.
 
        DATA DIVISION.
@@ -27,13 +27,10 @@
        01 AM-PASSWORD PIC X(20).
        01 AM-MESSAGE  PIC X(80).
 
-       PROCEDURE DIVISION USING AM-COMMAND AM-USERNAME 
-       AM-PASSWORD AM-MESSAGE.
-      *display "In Account Management"
-
+       PROCEDURE DIVISION USING AM-COMMAND AM-USERNAME AM-PASSWORD 
+       AM-MESSAGE.
            EVALUATE AM-COMMAND
               WHEN "CREATE"
-              display "CREATE ACCOUNT"
                    *> Reset flags
                    MOVE "N" TO WS-DUPLICATE-FLAG
                    MOVE "N" TO WS-END-OF-FILE
@@ -51,16 +48,16 @@
                    CLOSE ACCOUNT-FILE
 
                    IF WS-COUNT >= WS-LIMIT
-                     MOVE "All permitted accounts have been created, " &
-                        "please come back later"
-                      TO AM-MESSAGE
+                      MOVE "All permitted accounts have been created, "&
+                       "please come back later"
+                         TO AM-MESSAGE
                       GOBACK
                    END-IF
 
                    *> Validate password
                    CALL "UTILITIES" USING AM-PASSWORD WS-VALID-FLAG
                    IF WS-VALID-FLAG NOT = "Y"
-                      MOVE "Invalid password. Must be 8–12 chars, " &
+                      MOVE "Invalid password. Must be 8–12 chars, "& 
                       "1 uppercase, 1 digit, 1 special."
                          TO AM-MESSAGE
                       GOBACK
@@ -95,25 +92,7 @@
                    MOVE "Account created successfully." TO AM-MESSAGE
 
               WHEN "LOGIN"
-      *             OPEN INPUT ACCOUNT-FILE
-      *             PERFORM UNTIL WS-END-OF-FILE = "Y"
-      *                READ ACCOUNT-FILE
-      *                    AT END MOVE "Y" TO WS-END-OF-FILE
-      *                    NOT AT END
-      *                    display 'ACC-USERNAME' ACC-USERNAME
-
-      *                    display ACC-PASSWORD
-      *                    MOVE ACC-USERNAME TO AM-USERNAME
-      *                    MOVE ACC-PASSWORD TO AM-PASSWORD
-      *          display 'In AccountManagement'
-      *          display 'Username: ' AM-USERNAME
-      *          display 'Password: ' AM-PASSWORD
-                
-
-      *                END-READ
-      *             END-PERFORM
-      *             CLOSE ACCOUNT-FILE
-           CALL "LOGIN" USING AM-USERNAME AM-PASSWORD AM-MESSAGE
-              END-EVALUATE
+                   CALL "LOGIN" USING AM-USERNAME AM-PASSWORD AM-MESSAGE
+           END-EVALUATE
            GOBACK.
        END PROGRAM ACCOUNT-MGMT.
