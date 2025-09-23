@@ -1,3 +1,39 @@
+1
+Jordan
+Williams
+UCLA
+Information Technology
+2025
+Motivated and detail-oriented
+DONE
+Y
+Software Engineer Intern
+NextGen Tech Corp
+Summer 2023
+Developed cloud-based microservices.
+Y
+Data Analyst Intern
+City Research Lab
+Jan 2023 - Dec 2023
+Performed statistical analysis on large datasets.
+Y
+Team Coordinator
+Nonprofit Dev Group
+2021
+Organized coding events and managed volunteers.
+Y
+Bachelor of Science
+UCLA
+2020-2024
+Y
+Master of Science
+MIT
+2024-2026
+Y
+Associate Degree in Information Systems
+Community Institute
+2018-2022
+5
 1               ##FOR PROFILE VIEWING TESTING
 testuser1
 Password123!
