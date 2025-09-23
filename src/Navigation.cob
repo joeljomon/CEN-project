@@ -16,6 +16,7 @@
        PROCEDURE DIVISION USING NAV-USERNAME.
        MAIN-PROGRAM.
            MOVE NAV-USERNAME TO WS-USERNAME
+           MOVE 0 TO WS-CHOICE
            PERFORM UNTIL WS-CHOICE = 5
                PERFORM SHOW-MENU
                PERFORM GET-VALID-MAIN-CHOICE
@@ -78,6 +79,7 @@
                WHEN 5
                    MOVE "Logging out. Goodbye!" TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
+                   
            END-EVALUATE.
 
        GET-VALID-MAIN-CHOICE.

@@ -1,18 +1,14 @@
-2
-testuser1
-Password123!
 1
 testuser1
 Password123!
 1
-Ayush
-Title
-USF12
+John
+Doe
+USF
 Computer Science
 2025
-I am good
-I am happy
-This is multi line
+I enjoy coding.
+I like programming.
 DONE
 Y
 Software Intern
@@ -41,10 +37,117 @@ Y
 Diploma in Computing
 Community College
 2019-2021
-2
-3
-Ayush
-Title
-3
-Ayush
-Titl
+5
+1
+sampleuser
+SecurePass!9
+1
+Jane
+Smith
+Stanford
+Computer Science
+2027
+Passionate about learning and coding.
+DONE
+Y
+Software Engineer Intern
+TechCompany
+Summer 2023
+Gained valuable experience.
+N
+Y
+Associate of Science
+Community College
+2021-2023
+Y
+Bachelor of Science
+State University
+2023-2025
+N
+5
+1
+testuser2
+Samplepass2!
+1
+Jordan
+Williams
+UCLA
+Information Technology
+2025
+Motivated and detail-oriented
+DONE
+Y
+Software Engineer Intern
+NextGen Tech Corp
+Summer 2023
+Developed cloud-based microservices.
+Y
+Data Analyst Intern
+City Research Lab
+Jan 2023 - Dec 2023
+Performed statistical analysis on large datasets.
+Y
+Team Coordinator
+Nonprofit Dev Group
+2021
+Organized coding events and managed volunteers.
+Y
+Bachelor of Science
+UCLA
+2020-2024
+Y
+Master of Science
+MIT
+2024-2026
+Y
+Associate Degree in Information Systems
+Community Institute
+2018-2022
+5
+1               ##FOR PROFILE VIEWING TESTING
+testuser1
+Password123!
+2               ##Test Case 1: View user profile
+5
+1
+sampleuser
+SecurePass!9
+2               ##Test Case 2: View second user's profile
+5
+1
+testuser2
+Samplepass2!  
+2               ##Test Case 3: View third user's profile  
+3           ##FOR USER SEARCH TESTING: Test Case 1: Valid - search for existing user   
+Jane
+Smith
+3           ##Test Case 2: Valid - search for another existing user
+John
+Doe
+3           ##Test Case 3: Valid - search for existing user with different case
+Jordan
+williams
+3           ##Test Case 4: Valid - search for existing user with different case
+john
+doe
+3           ##Test Case 5: Invalid - missing last name
+Jane
+
+3           ##Test Case 6: Invalid - nonexistent user
+Jack
+Doe
+3           ##Test Case 7: Invalid - incomplete/abbreviated last name
+John
+D
+
+3           ##Test Case 8: Invalid - misspelled first name
+Jnae
+Smith
+3           ##Test Case 9: Invalid - misspelled last name
+Jordan
+Wlliams
+3           ##Test Case 10: Invalid - empty name fields
+
+
+5           
+9
