@@ -1,4 +1,5 @@
-1               ##FOR PROFILE VIEWING TESTING
+##FOR PROFILE VIEWING TESTING
+1               
 testuser1
 Password123!
 2               ##Test Case 1: View user profile
@@ -12,7 +13,8 @@ SecurePass!9
 testuser2
 Samplepass2!  
 2               ##Test Case 3: View third user's profile  
-3           ##FOR USER SEARCH TESTING: Test Case 1: Valid - search for existing user   
+##FOR USER SEARCH TESTING: 
+3           ##Test Case 1: Valid - search for existing user   
 Jane
 Smith
 3           ##Test Case 2: Valid - search for another existing user
