@@ -43,7 +43,13 @@
        77 WS-TMP-FIRST-NAME   PIC X(20).
        77 WS-TMP-LAST-NAME    PIC X(20).
 
-       PROCEDURE DIVISION.
+       77 WS-LINK-RECEIVER-NAME PIC X(40).
+
+       LINKAGE SECTION.
+       01 L-SENDER-USERNAME PIC X(20).
+
+       PROCEDURE DIVISION USING L-SENDER-USERNAME.
+
        MAIN-PROGRAM.
            MOVE SPACES TO WS-LINE
            MOVE "Enter the user's first name:" TO WS-LINE
@@ -87,6 +93,18 @@
 
            IF WS-FOUND = "Y"
                CALL "VIEW-PROFILE" USING WS-MATCH-USERNAME
+
+               *> Build receiver full name for request
+               STRING PROF-FIRST-NAME DELIMITED BY SPACE
+                      " " DELIMITED BY SIZE
+                      PROF-LAST-NAME  DELIMITED BY SIZE
+                      INTO WS-LINK-RECEIVER-NAME
+               END-STRING
+
+               CALL "CONNECTION-REQUEST"
+                   USING L-SENDER-USERNAME   *> sender from login
+                         WS-MATCH-USERNAME   *> receiver username
+                         WS-LINK-RECEIVER-NAME *> receiver full name
            ELSE
               MOVE SPACES TO WS-LINE
               MOVE "! No profile found for this name." TO WS-LINE
@@ -100,4 +118,3 @@
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
 
        END PROGRAM SEARCH-USER.
-       

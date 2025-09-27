@@ -65,7 +65,7 @@
                        TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
 
-                   CALL "SEARCH-USER"
+                   CALL "SEARCH-USER" USING WS-USERNAME
 
                WHEN 4
                    MOVE "You chose to learn a new skill."
@@ -105,4 +105,4 @@
        WRITE-BOTH.
            MOVE WS-OUTPUT-LINE TO WS-LINE
            MOVE "WRITE" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
+           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
