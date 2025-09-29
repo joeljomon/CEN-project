@@ -1,4 +1,4 @@
-       IDENTIFICATION DIVISION.
+IDENTIFICATION DIVISION.
        PROGRAM-ID. SEARCH-USER.
 
        ENVIRONMENT DIVISION.
@@ -30,102 +30,134 @@
              10 PROF-EDU-YEARS    PIC X(20).
 
        WORKING-STORAGE SECTION.
-       77 WS-COMMAND           PIC X(20).
-       77 WS-LINE              PIC X(200).
-       77 WS-PROFILE-STATUS    PIC XX.
-       77 WS-END-FILE          PIC X VALUE "N".
-       77 WS-FOUND             PIC X VALUE "N".
-       77 WS-INPUT             PIC X(80).
-       77 WS-MATCH-USERNAME    PIC X(20).
-
-       77 WS-SEARCH-FIRSTNAME  PIC X(20).
-       77 WS-SEARCH-LASTNAME   PIC X(20).
-       77 WS-TMP-FIRST-NAME    PIC X(20).
-       77 WS-TMP-LAST-NAME     PIC X(20).
-
-       *> Capture matched names while file is open
-       77 WS-MATCH-FIRSTNAME   PIC X(20).
-       77 WS-MATCH-LASTNAME    PIC X(20).
-
-       77 WS-LINK-RECEIVER-NAME PIC X(40).
+       77 WS-COMMAND        PIC X(20).
+       77 WS-LINE           PIC X(200).
+       77 WS-PROFILE-STATUS PIC XX.
+       77 WS-END            PIC X VALUE "N".
+       77 WS-FOUND          PIC X VALUE "N".
+       77 WS-FIRST-NAME     PIC X(80) VALUE SPACES.
+       77 WS-LAST-NAME      PIC X(80) VALUE SPACES.
+       77 WS-TMP            PIC X(80) VALUE SPACES.
+       77 WS-MATCH-USER     PIC X(20) VALUE SPACES.
 
        LINKAGE SECTION.
-       01 L-SENDER-USERNAME PIC X(20).
+       01 L-USERNAME        PIC X(20).
 
-       PROCEDURE DIVISION USING L-SENDER-USERNAME.
-
+       PROCEDURE DIVISION USING L-USERNAME.
        MAIN-PROGRAM.
-           MOVE SPACES TO WS-LINE
-           MOVE "Enter the user's first name:" TO WS-LINE
-           PERFORM WRITE-LINE
+           MOVE "================== Search for User ===================" 
+              TO WS-LINE
+           PERFORM OUT
 
+           *> First Name
+           MOVE "Enter First Name:" TO WS-LINE
+           PERFORM OUT
+           MOVE SPACES TO WS-FIRST-NAME
            MOVE "READ" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-INPUT
-           MOVE FUNCTION TRIM(WS-INPUT) TO WS-SEARCH-FIRSTNAME
+           CALL "IO-MODULE" USING WS-COMMAND WS-FIRST-NAME
 
-           MOVE SPACES TO WS-LINE
-           MOVE "Enter the user's last name:" TO WS-LINE
-           PERFORM WRITE-LINE
-
+           *> Last Name
+           MOVE "Enter Last Name:" TO WS-LINE
+           PERFORM OUT
+           MOVE SPACES TO WS-LAST-NAME
            MOVE "READ" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-INPUT
-           MOVE FUNCTION TRIM(WS-INPUT) TO WS-SEARCH-LASTNAME
+           CALL "IO-MODULE" USING WS-COMMAND WS-LAST-NAME
 
-           MOVE "N" TO WS-END-FILE
-           MOVE "N" TO WS-FOUND
-
+           *> Search profiles
            OPEN INPUT PROFILE-FILE
-
            IF WS-PROFILE-STATUS = "00"
-              PERFORM UNTIL WS-END-FILE = "Y"
-                  READ PROFILE-FILE
-                      AT END
-                          MOVE "Y" TO WS-END-FILE
-                      NOT AT END
-                          MOVE FUNCTION TRIM(PROF-FIRST-NAME) TO WS-TMP-FIRST-NAME
-                          MOVE FUNCTION TRIM(PROF-LAST-NAME)  TO WS-TMP-LAST-NAME
-
-                          IF FUNCTION UPPER-CASE(WS-TMP-FIRST-NAME) =
-                             FUNCTION UPPER-CASE(WS-SEARCH-FIRSTNAME)
-                             AND
-                             FUNCTION UPPER-CASE(WS-TMP-LAST-NAME)  =
-                             FUNCTION UPPER-CASE(WS-SEARCH-LASTNAME)
-                              MOVE "Y" TO WS-FOUND
-                              MOVE PROF-USERNAME     TO WS-MATCH-USERNAME
-                              MOVE PROF-FIRST-NAME   TO WS-MATCH-FIRSTNAME
-                              MOVE PROF-LAST-NAME    TO WS-MATCH-LASTNAME
-                              MOVE "Y" TO WS-END-FILE  *> Stop after first match
-                          END-IF
-                  END-READ
+              MOVE "N" TO WS-END
+              PERFORM UNTIL WS-END = "Y"
+                 READ PROFILE-FILE
+                    AT END MOVE "Y" TO WS-END
+                    NOT AT END
+                       IF FUNCTION UPPER-CASE(FUNCTION TRIM(PROF-FIRST-NAME)) =
+                          FUNCTION UPPER-CASE(FUNCTION TRIM(WS-FIRST-NAME))
+                          AND FUNCTION UPPER-CASE(FUNCTION TRIM(PROF-LAST-NAME)) =
+                          FUNCTION UPPER-CASE(FUNCTION TRIM(WS-LAST-NAME))
+                          MOVE "Y" TO WS-FOUND
+                          MOVE PROF-USERNAME TO WS-MATCH-USER
+                          MOVE "Y" TO WS-END
+                       END-IF
+                 END-READ
               END-PERFORM
-              CLOSE PROFILE-FILE
            END-IF
+           CLOSE PROFILE-FILE
 
            IF WS-FOUND = "Y"
-               *> Show the found profile (by username)
-               CALL "VIEW-PROFILE" USING WS-MATCH-USERNAME
-
-               *> Build receiver full name for request using WS values (safe after file close)
-               STRING FUNCTION TRIM(WS-MATCH-FIRSTNAME) DELIMITED BY SIZE
-                      " "                               DELIMITED BY SIZE
-                      FUNCTION TRIM(WS-MATCH-LASTNAME)  DELIMITED BY SIZE
-                      INTO WS-LINK-RECEIVER-NAME
-               END-STRING
-
-               *> Trigger connection request flow
-               CALL "CONNECTION-REQUEST"
-                   USING L-SENDER-USERNAME      *> sender from login
-                         WS-MATCH-USERNAME      *> receiver username
-                         WS-LINK-RECEIVER-NAME  *> receiver full name
+              PERFORM SHOW-PROFILE
+              PERFORM PROMPT-CONNECTION
            ELSE
-              MOVE SPACES TO WS-LINE
               MOVE "! No profile found for this name." TO WS-LINE
-              PERFORM WRITE-LINE
+              PERFORM OUT
            END-IF
 
            GOBACK.
 
-       WRITE-LINE.
+       SHOW-PROFILE.
+           MOVE SPACES TO WS-LINE
+           STRING "========== Profile for: "
+                  FUNCTION TRIM(PROF-FIRST-NAME) " "
+                  FUNCTION TRIM(PROF-LAST-NAME)
+                  " ==========" DELIMITED BY SIZE
+                  INTO WS-LINE
+           END-STRING
+           PERFORM OUT
+
+           MOVE SPACES TO WS-LINE
+           STRING "> Name: "
+                  FUNCTION TRIM(PROF-FIRST-NAME) " "
+                  FUNCTION TRIM(PROF-LAST-NAME)
+                  DELIMITED BY SIZE
+                  INTO WS-LINE
+           END-STRING
+           PERFORM OUT
+
+           MOVE SPACES TO WS-LINE
+           STRING "> University: " FUNCTION TRIM(PROF-UNIVERSITY)
+                  DELIMITED BY SIZE
+                  INTO WS-LINE
+           END-STRING
+           PERFORM OUT
+
+           MOVE SPACES TO WS-LINE
+           STRING "> Major: " FUNCTION TRIM(PROF-MAJOR)
+                  DELIMITED BY SIZE
+                  INTO WS-LINE
+           END-STRING
+           PERFORM OUT
+
+           MOVE SPACES TO WS-LINE
+           STRING "> Graduation Year: " PROF-GRAD-YEAR 
+                  DELIMITED BY SIZE
+                  INTO WS-LINE
+           END-STRING
+           PERFORM OUT
+
+           MOVE "> About:" TO WS-LINE
+           PERFORM OUT
+           MOVE PROF-ABOUT TO WS-LINE
+           PERFORM OUT
+
+           MOVE "==================================" TO WS-LINE
+           PERFORM OUT.
+
+       PROMPT-CONNECTION.
+           MOVE "1. Send Connection Request" TO WS-LINE
+           PERFORM OUT
+           MOVE "2. Back to Main Menu" TO WS-LINE
+           PERFORM OUT
+
+           MOVE SPACES TO WS-TMP
+           MOVE "READ" TO WS-COMMAND
+           CALL "IO-MODULE" USING WS-COMMAND WS-TMP
+
+           IF FUNCTION TRIM(WS-TMP) = "1"
+              CALL "CONNECTION-REQUEST" USING L-USERNAME WS-MATCH-USER
+           END-IF.
+
+       OUT.
            MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
-           
+
+       END PROGRAM SEARCH-USER.
