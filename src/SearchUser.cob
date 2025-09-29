@@ -30,18 +30,22 @@
              10 PROF-EDU-YEARS    PIC X(20).
 
        WORKING-STORAGE SECTION.
-       77 WS-COMMAND        PIC X(20).
-       77 WS-LINE           PIC X(200).
-       77 WS-PROFILE-STATUS PIC XX.
-       77 WS-END-FILE       PIC X VALUE "N".
-       77 WS-FOUND          PIC X VALUE "N".
-       77 WS-INPUT          PIC X(80).
-       77 WS-MATCH-USERNAME PIC X(20).
+       77 WS-COMMAND           PIC X(20).
+       77 WS-LINE              PIC X(200).
+       77 WS-PROFILE-STATUS    PIC XX.
+       77 WS-END-FILE          PIC X VALUE "N".
+       77 WS-FOUND             PIC X VALUE "N".
+       77 WS-INPUT             PIC X(80).
+       77 WS-MATCH-USERNAME    PIC X(20).
 
-       77 WS-SEARCH-FIRSTNAME PIC X(20).
-       77 WS-SEARCH-LASTNAME  PIC X(20).
-       77 WS-TMP-FIRST-NAME   PIC X(20).
-       77 WS-TMP-LAST-NAME    PIC X(20).
+       77 WS-SEARCH-FIRSTNAME  PIC X(20).
+       77 WS-SEARCH-LASTNAME   PIC X(20).
+       77 WS-TMP-FIRST-NAME    PIC X(20).
+       77 WS-TMP-LAST-NAME     PIC X(20).
+
+       *> Capture matched names while file is open
+       77 WS-MATCH-FIRSTNAME   PIC X(20).
+       77 WS-MATCH-LASTNAME    PIC X(20).
 
        77 WS-LINK-RECEIVER-NAME PIC X(40).
 
@@ -79,11 +83,17 @@
                           MOVE "Y" TO WS-END-FILE
                       NOT AT END
                           MOVE FUNCTION TRIM(PROF-FIRST-NAME) TO WS-TMP-FIRST-NAME
-                          MOVE FUNCTION TRIM(PROF-LAST-NAME) TO WS-TMP-LAST-NAME
-                          IF FUNCTION UPPER-CASE(WS-TMP-FIRST-NAME) = FUNCTION UPPER-CASE(WS-SEARCH-FIRSTNAME)
-                             AND FUNCTION UPPER-CASE(WS-TMP-LAST-NAME) = FUNCTION UPPER-CASE(WS-SEARCH-LASTNAME)
+                          MOVE FUNCTION TRIM(PROF-LAST-NAME)  TO WS-TMP-LAST-NAME
+
+                          IF FUNCTION UPPER-CASE(WS-TMP-FIRST-NAME) =
+                             FUNCTION UPPER-CASE(WS-SEARCH-FIRSTNAME)
+                             AND
+                             FUNCTION UPPER-CASE(WS-TMP-LAST-NAME)  =
+                             FUNCTION UPPER-CASE(WS-SEARCH-LASTNAME)
                               MOVE "Y" TO WS-FOUND
-                              MOVE PROF-USERNAME TO WS-MATCH-USERNAME
+                              MOVE PROF-USERNAME     TO WS-MATCH-USERNAME
+                              MOVE PROF-FIRST-NAME   TO WS-MATCH-FIRSTNAME
+                              MOVE PROF-LAST-NAME    TO WS-MATCH-LASTNAME
                               MOVE "Y" TO WS-END-FILE  *> Stop after first match
                           END-IF
                   END-READ
@@ -92,19 +102,21 @@
            END-IF
 
            IF WS-FOUND = "Y"
+               *> Show the found profile (by username)
                CALL "VIEW-PROFILE" USING WS-MATCH-USERNAME
 
-               *> Build receiver full name for request
-               STRING PROF-FIRST-NAME DELIMITED BY SPACE
-                      " " DELIMITED BY SIZE
-                      PROF-LAST-NAME  DELIMITED BY SIZE
+               *> Build receiver full name for request using WS values (safe after file close)
+               STRING FUNCTION TRIM(WS-MATCH-FIRSTNAME) DELIMITED BY SIZE
+                      " "                               DELIMITED BY SIZE
+                      FUNCTION TRIM(WS-MATCH-LASTNAME)  DELIMITED BY SIZE
                       INTO WS-LINK-RECEIVER-NAME
                END-STRING
 
+               *> Trigger connection request flow
                CALL "CONNECTION-REQUEST"
-                   USING L-SENDER-USERNAME   *> sender from login
-                         WS-MATCH-USERNAME   *> receiver username
-                         WS-LINK-RECEIVER-NAME *> receiver full name
+                   USING L-SENDER-USERNAME      *> sender from login
+                         WS-MATCH-USERNAME      *> receiver username
+                         WS-LINK-RECEIVER-NAME  *> receiver full name
            ELSE
               MOVE SPACES TO WS-LINE
               MOVE "! No profile found for this name." TO WS-LINE
@@ -116,5 +128,4 @@
        WRITE-LINE.
            MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
-
-       END PROGRAM SEARCH-USER.
+           

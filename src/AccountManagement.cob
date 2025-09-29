@@ -55,7 +55,7 @@
                    *> Validate password
                    CALL "UTILITIES" USING AM-PASSWORD WS-VALID-FLAG
                    IF WS-VALID-FLAG NOT = "Y"
-                      MOVE "Invalid password. Must be 8–12 chars, 1 uppercase, 1 digit, 1 special."
+                      MOVE "Invalid password. Must be 8-12 chars, 1 uppercase, 1 digit, 1 special."
                          TO AM-MESSAGE
                       GOBACK
                    END-IF

@@ -1,58 +1,29 @@
-# InCollege COBOL Project - EPIC 2
+# InCollege COBOL Project — EPIC 4
 
 ## What it supports currently
 
-- Input in `data/incollege-input.txt` making sure `data/incollege-output.txt`, `data/accounts.dat`, `data/profiles.dat` exist
-- It will create upto 5 users with password policy enforcement of >8 and <=12 chars, 1 digit, speacial and UPPER req
-- Each user can create a profile
-- One user cannot create multiple profiles with same username
-- All fields in profile creation have input validation
+- Input is read from **`data/InCollege-Input.txt`**  
+  Make sure these files exist:
+  - `data/InCollege-Input.txt` (test script)
+  - `data/InCollege-Output.txt` (logs)
+  - `data/accounts.dat`
+  - `data/profiles.dat`
+  - `data/connections.dat`
+  - `data/pending.dat`
+- Create up to 5 users with password policy (8–12 chars, ≥1 uppercase, ≥1 digit, ≥1 special).
+- Each user can create **one** profile (fields validated).
+- Data persists across runs in `data/*.dat`.
+- **Epic 4 features**:
+  - Search user by first + last name (case-insensitive).
+  - **Send Connection Request** from profile view.
+  - **Duplicate protection**:
+    - Cannot send a request to yourself.
+    - Cannot send if you already sent one (outgoing duplicate).
+    - Cannot send if they already sent you one (incoming duplicate).
+    - Cannot send if already connected.
+  - **View My Pending Connection Requests** (menu item shows all requests where you are the receiver).
 
-- All data is stored in `data/accounts.dat` and `data/profiles.dat`
-- Data persists even when the program is restarted
+---
 
 ## Folder Structure
-
-- `src` is where all the code lives
-- `src/InCollege.cob` is the main file which references to files like `AccountManagement.cob` and so on
-- The main idea is to keep functionalities like password check, input/output seperate and so on seperate
-- If adding a new logic like `login` functionalitiy add a `logic.cob` in src/ and reference it in  `InCollege.cob` wherever needed like below:
-> An example of `AccountManagement.cob` - how it was referenced in `InCollege.cob`
-```
-CALL "ACCOUNT-MGMT" USING WS-COMMAND WS-USERNAME WS-PASSWORD WS-MESSAGE
-```
-> and in AccountManagement.cob define it as 
-```
-IDENTIFICATION DIVISION.
-PROGRAM-ID. ACCOUNT-MGMT.
-```
-
-
-## Run
-
-> Ensure you have docker  
-> Clone this repo  
-> Open the folder of this repo in VS Code  
-> Press `cmd + shift + P`  
-
-![alt text](image.png)
-
-> Choose the option as shown in screenshot  
-> Initially try `cmd + shift + B`  
-> It should build and automatically get Inputs from data/*-input.txt and log output in data/*-output.txt  
-
-
-## For Testers
-
-- Create a branch `feature/test-IO` or something with understandable name from this branch
-- Go to `src/IO.cob`, you will see lines:
-```
-           SELECT INPUT-FILE ASSIGN TO "data/InCollege-Input.txt"
-               ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT OUTPUT-FILE ASSIGN TO "data/InCollege-Output.txt"
-               ORGANIZATION IS LINE SEQUENTIAL.
-```
-- Here update `data/*` files to `tests/test1-input.txt` and so on also `tests/test1-output.txt`
-- Test all edge cases for account management
-
 

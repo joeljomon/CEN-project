@@ -1,30 +1,22 @@
 1
-Samuel123
-Password1!
+testuser1
+Password123!
 3
 John
 Doe
-1
-2
 5
 1
-testuser2
-Samplepass2!   
-2           ##Test Case 3: View third user's profile  
-3           ##FOR USER SEARCH TESTING: Test Case 1: Valid - search for existing user   
-Jane
+Alice
 Smith
-1
-2
-5
-1
-testuser1
-Password123!
-2
-3           ##Test Case 3: Valid - search for existing user with different case
-Jordan
-williams
-1
-2
-5
-9
+USF
+Computer Science
+2026
+Love backend APIs and data.
+DONE
+N
+N
+N
+N
+N
+N
+6

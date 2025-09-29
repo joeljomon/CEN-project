@@ -8,251 +8,59 @@ Main Menu:
 2. View User Profile
 3. Search for User
 4. Learn a new skill
-5. Log Out
+5. View My Pending Connection Requests
+6. Log Out
 Enter your choice:
 You chose to search for a user.
 ================== Search for User ===================
 Enter the user's first name:
 Enter the user's last name:
-========== Profile for: John Doe ==========
-> Name: John Doe
-> University: USF
-> Major: Computer Science
-> Graduation Year: 2025
-> About:
-I enjoy coding.
-> Experience:
->>    Title: Software Intern
->>       Company: Tech Solutions Inc.
->>       Dates: Summer 2024
->>       Description: Worked on backend APIs.
->>    Title: Research Assistant
->>       Company: State University
->>       Dates: Sep 2023 - May 2024
->>       Description: Assisted in data analysis for ML project.
->>    Title: Project Lead
->>       Company: Open Source Org
->>       Dates: 2022
->>       Description: Led a team for open source contributions.
-> Education:
->>    Degree: Bachelor of Science
->>       School: USF12
->>       Years: 2021-2025
->>    Degree: Master of Science
->>       School: State University
->>       Years: 2025-2027
->>    Degree: Diploma in Computing
->>       School: Community College
->>       Years: 2019-2021
-==================================
-1. Send Connection Request
-2. Back to Main Menu
-Enter your choice:
-Connection request sent to John Doe
-1. Send Connection Request
-2. Back to Main Menu
-Enter your choice:
+! No profile found for this name.
 Main Menu:
 1. Create/Edit User Profile
 2. View User Profile
 3. Search for User
 4. Learn a new skill
-5. Log Out
+5. View My Pending Connection Requests
+6. Log Out
 Enter your choice:
+You chose to view pending requests.
+================= Pending Requests =================
+---- Pending Connection Requests ----
+You have no pending connection requests at this time.
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+You chose to create or edit your profile.
+================== Create/Edit Profile ==================
+Enter First Name:
+Enter Last Name:
+Enter University/College Attended:
+Enter Major:
+Enter Graduation Year (4 digits, e.g., 2025):
+Enter About Me. Type 'DONE' on a new line to finish (max 200 chars):
+Do you want to add an Experience entry? (Y/N):
+Do you want to add an Education entry? (Y/N):
+============== Profile saved successfully. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+Invalid choice. Please try again.
+Invalid choice. Please try again.
+Invalid choice. Please try again.
+Invalid choice. Please try again.
 Logging out. Goodbye!
  ================ Welcome to InCollege! =====================
 1. Log In
 2. Create New Account
 9. Exit
-================ You have successfully logged in. ===================
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You Chose to view your profile.
-========== Profile for: Jordan Williams ==========
-> Name: Jordan Williams
-> University: UCLA
-> Major: Information Technology
-> Graduation Year: 2025
-> About:
-Motivated and detail-oriented
-> Experience:
->>    Title: Software Engineer Intern
->>       Company: NextGen Tech Corp
->>       Dates: Summer 2023
->>       Description: Developed cloud-based microservices.
->>    Title: Data Analyst Intern
->>       Company: City Research Lab
->>       Dates: Jan 2023 - Dec 2023
->>       Description: Performed statistical analysis on large datasets.
->>    Title: Team Coordinator
->>       Company: Nonprofit Dev Group
->>       Dates: 2021
->>       Description: Organized coding events and managed volunteers.
-> Education:
->>    Degree: Bachelor of Science
->>       School: UCLA
->>       Years: 2020-2024
->>    Degree: Master of Science
->>       School: MIT
->>       Years: 2024-2026
->>    Degree: Associate of Science
->>       School: Community Institute
->>       Years: 2018-2022
-==================================
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-========== Profile for: Jane Smith ==========
-> Name: Jane Smith
-> University: Stanford
-> Major: Computer Science
-> Graduation Year: 2027
-> About:
-Passionate about learning and coding.
-> Experience:
->>    Title: Software Engineer Intern
->>       Company: TechCompany
->>       Dates: Summer 2023
->>       Description: Gained valuable experience.
-> Education:
->>    Degree: Associate of Science
->>       School: Community College
->>       Years: 2021-2023
->>    Degree: Bachelor of Science
->>       School: State University
->>       Years: 2023-2025
-==================================
-1. Send Connection Request
-2. Back to Main Menu
-Enter your choice:
-Connection request sent to Jane Smith
-1. Send Connection Request
-2. Back to Main Menu
-Enter your choice:
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-Logging out. Goodbye!
- ================ Welcome to InCollege! =====================
-1. Log In
-2. Create New Account
-9. Exit
-================ You have successfully logged in. ===================
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You Chose to view your profile.
-========== Profile for: John Doe ==========
-> Name: John Doe
-> University: USF
-> Major: Computer Science
-> Graduation Year: 2025
-> About:
-I enjoy coding.
-> Experience:
->>    Title: Software Intern
->>       Company: Tech Solutions Inc.
->>       Dates: Summer 2024
->>       Description: Worked on backend APIs.
->>    Title: Research Assistant
->>       Company: State University
->>       Dates: Sep 2023 - May 2024
->>       Description: Assisted in data analysis for ML project.
->>    Title: Project Lead
->>       Company: Open Source Org
->>       Dates: 2022
->>       Description: Led a team for open source contributions.
-> Education:
->>    Degree: Bachelor of Science
->>       School: USF12
->>       Years: 2021-2025
->>    Degree: Master of Science
->>       School: State University
->>       Years: 2025-2027
->>    Degree: Diploma in Computing
->>       School: Community College
->>       Years: 2019-2021
-==================================
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-========== Profile for: Jordan Williams ==========
-> Name: Jordan Williams
-> University: UCLA
-> Major: Information Technology
-> Graduation Year: 2025
-> About:
-Motivated and detail-oriented
-> Experience:
->>    Title: Software Engineer Intern
->>       Company: NextGen Tech Corp
->>       Dates: Summer 2023
->>       Description: Developed cloud-based microservices.
->>    Title: Data Analyst Intern
->>       Company: City Research Lab
->>       Dates: Jan 2023 - Dec 2023
->>       Description: Performed statistical analysis on large datasets.
->>    Title: Team Coordinator
->>       Company: Nonprofit Dev Group
->>       Dates: 2021
->>       Description: Organized coding events and managed volunteers.
-> Education:
->>    Degree: Bachelor of Science
->>       School: UCLA
->>       Years: 2020-2024
->>    Degree: Master of Science
->>       School: MIT
->>       Years: 2024-2026
->>    Degree: Associate of Science
->>       School: Community Institute
->>       Years: 2018-2022
-==================================
-1. Send Connection Request
-2. Back to Main Menu
-Enter your choice:
-Connection request sent to Jordan Williams
-1. Send Connection Request
-2. Back to Main Menu
-Enter your choice:
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-Logging out. Goodbye!
- ================ Welcome to InCollege! =====================
-1. Log In
-2. Create New Account
-9. Exit
- =============== Thank you for using InCollege! =================
