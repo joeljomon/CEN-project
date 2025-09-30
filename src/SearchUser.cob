@@ -45,9 +45,7 @@ IDENTIFICATION DIVISION.
 
        PROCEDURE DIVISION USING L-USERNAME.
        MAIN-PROGRAM.
-           MOVE "================== Search for User ===================" 
-              TO WS-LINE
-           PERFORM OUT
+           MOVE "N" TO WS-FOUND.
 
            *> First Name
            MOVE "Enter First Name:" TO WS-LINE
