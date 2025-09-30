@@ -1,0 +1,64 @@
+##TESTING FOR SENDING REQUESTS
+
+1       
+testuser1
+Password123!
+
+##TEST CASE 1: Valid - send request to existing user
+3       
+Jordan
+Williams
+1
+
+##TEST CASE 2: Valid - send request to second existing user
+3       
+Jane
+Smith
+1
+
+##TEST CASE 3: Invalid - send request to same user again
+3       
+Jane
+Smith
+1
+
+##TEST CASE 4: Invalid - send request to nonexistent user
+3       
+Nonexistent
+User
+
+##TEST CASE 5: Invalid - send request to self
+3       
+Alice
+Smith
+1
+6
+
+##TESTING FOR PENDING REQUESTS
+1       
+testuser1
+Password123!
+
+##TEST CASE 6: View pending requests
+5       
+
+##TEST CASE 7: Invalid - send request to user with existing pending request
+3       
+Jordan
+Williams
+1
+6
+1
+testuser2
+Samplepass2!
+
+##TEST CASE 8: View pending requests for different user
+5    
+
+##TEST CASE 9: Invalid - send request to user with existing pending request   
+3      
+Alice
+Smith
+1
+6
+9

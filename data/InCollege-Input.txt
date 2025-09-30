@@ -1,83 +1,42 @@
-1
-Jordan
-Williams
-UCLA
-Information Technology
-2025
-Motivated and detail-oriented
-DONE
-Y
-Software Engineer Intern
-NextGen Tech Corp
-Summer 2023
-Developed cloud-based microservices.
-Y
-Data Analyst Intern
-City Research Lab
-Jan 2023 - Dec 2023
-Performed statistical analysis on large datasets.
-Y
-Team Coordinator
-Nonprofit Dev Group
-2021
-Organized coding events and managed volunteers.
-Y
-Bachelor of Science
-UCLA
-2020-2024
-Y
-Master of Science
-MIT
-2024-2026
-Y
-Associate Degree in Information Systems
-Community Institute
-2018-2022
-5
-1               ##FOR PROFILE VIEWING TESTING
+1       ##TESTING FOR SENDING REQUESTS
 testuser1
 Password123!
-2               ##Test Case 1: View user profile
-5
+3       ##TEST CASE 1: Valid - send request to existing user
+Jordan
+Williams
 1
-sampleuser
-SecurePass!9
-2               ##Test Case 2: View second user's profile
-5
+3       ##TEST CASE 2: Valid - send request to second existing user
+Jane
+Smith
+1
+3       ##TEST CASE 3: Invalid - send request to same user again
+Jane
+Smith
+1
+3       ##TEST CASE 4: Invalid - send request to nonexistent user
+Nonexistent
+User
+3       ##TEST CASE 5: Invalid - send request to self
+Alice
+Smith
+1
+6
+1       ##TESTING FOR PENDING REQUESTS
+testuser1
+Password123!
+5       ##TEST CASE 6: View pending requests
+3       ##TEST CASE 7: Invalid - send request to user with existing pending request
+Jordan
+Williams
+1
+6
 1
 testuser2
-Samplepass2!  
-2               ##Test Case 3: View third user's profile  
-3           ##FOR USER SEARCH TESTING: Test Case 1: Valid - search for existing user   
-Jane
+Samplepass2!
+5       ##TEST CASE 8: View pending requests for different user
+3       ##TEST CASE 9: Invalid - send request to user with existing pending request
+Alice
 Smith
-3           ##Test Case 2: Valid - search for another existing user
-John
-Doe
-3           ##Test Case 3: Valid - search for existing user with different case
-Jordan
-williams
-3           ##Test Case 4: Valid - search for existing user with different case
-john
-doe
-3           ##Test Case 5: Invalid - missing last name
-Jane
-
-3           ##Test Case 6: Invalid - nonexistent user
-Jack
-Doe
-3           ##Test Case 7: Invalid - incomplete/abbreviated last name
-John
-D
-
-3           ##Test Case 8: Invalid - misspelled first name
-Jnae
-Smith
-3           ##Test Case 9: Invalid - misspelled last name
-Jordan
-Wlliams
-3           ##Test Case 10: Invalid - empty name fields
-
-
-5           
+1
+6
 9

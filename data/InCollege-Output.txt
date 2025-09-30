@@ -8,85 +8,13 @@ Main Menu:
 2. View User Profile
 3. Search for User
 4. Learn a new skill
-5. Log Out
+5. View My Pending Connection Requests
+6. Log Out
 Enter your choice:
 You chose to search for a user.
 ================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-========== Profile for: Jane Smith ==========
-> Name: Jane Smith
-> University: Stanford
-> Major: Computer Science
-> Graduation Year: 2027
-> About:
-Passionate about learning and coding.
-> Experience:
->>    Title: Software Engineer Intern
->>       Company: TechCompany
->>       Dates: Summer 2023
->>       Description: Gained valuable experience.
-> Education:
->>    Degree: Associate of Science
->>       School: Community College
->>       Years: 2021-2023
->>    Degree: Bachelor of Science
->>       School: State University
->>       Years: 2023-2025
-==================================
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-========== Profile for: John Doe ==========
-> Name: John Doe
-> University: USF12
-> Major: Computer Science
-> Graduation Year: 2025
-> About:
-I am good
-> Experience:
->>    Title: Software Intern
->>       Company: Tech Solutions Inc.
->>       Dates: Summer 2024
->>       Description: Worked on backend APIs.
->>    Title: Research Assistant
->>       Company: State University
->>       Dates: Sep 2023 - May 2024
->>       Description: Assisted in data analysis for ML project.
->>    Title: Project Lead
->>       Company: Open Source Org
->>       Dates: 2022
->>       Description: Led a team for open source contributions.
-> Education:
->>    Degree: Bachelor of Science
->>       School: USF12
->>       Years: 2021-2025
->>    Degree: Master of Science
->>       School: State University
->>       Years: 2025-2027
->>    Degree: Diploma in Computing
->>       School: Community College
->>       Years: 2019-2021
-==================================
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
+Enter First Name:
+Enter Last Name:
 ========== Profile for: Jordan Williams ==========
 > Name: Jordan Williams
 > University: UCLA
@@ -94,151 +22,199 @@ Enter the user's last name:
 > Graduation Year: 2025
 > About:
 Motivated and detail-oriented
-> Experience:
->>    Title: Software Engineer Intern
->>       Company: NextGen Tech Corp
->>       Dates: Summer 2023
->>       Description: Developed cloud-based microservices.
->>    Title: Data Analyst Intern
->>       Company: City Research Lab
->>       Dates: Jan 2023 - Dec 2023
->>       Description: Performed statistical analysis on large datasets.
->>    Title: Team Coordinator
->>       Company: Nonprofit Dev Group
->>       Dates: 2021
->>       Description: Organized coding events and managed volunteers.
-> Education:
->>    Degree: Bachelor of Science
->>       School: UCLA
->>       Years: 2020-2024
->>    Degree: Master of Science
->>       School: MIT
->>       Years: 2024-2026
->>    Degree: Associate Degree in Informatio
->>       School: Community Institute
->>       Years: 2018-2022
 ==================================
+1. Send Connection Request
+2. Back to Main Menu
+You already sent a connection request to this user.
 Main Menu:
 1. Create/Edit User Profile
 2. View User Profile
 3. Search for User
 4. Learn a new skill
-5. Log Out
+5. View My Pending Connection Requests
+6. Log Out
 Enter your choice:
 You chose to search for a user.
 ================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-========== Profile for: John Doe ==========
-> Name: John Doe
-> University: USF12
+Enter First Name:
+Enter Last Name:
+========== Profile for: Jane Smith ==========
+> Name: Jane Smith
+> University: Stanford
 > Major: Computer Science
+> Graduation Year: 2027
+> About:
+Passionate about learning and coding.
+==================================
+1. Send Connection Request
+2. Back to Main Menu
+You already sent a connection request to this user.
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+You chose to search for a user.
+================== Search for User ===================
+Enter First Name:
+Enter Last Name:
+========== Profile for: Jane Smith ==========
+> Name: Jane Smith
+> University: Stanford
+> Major: Computer Science
+> Graduation Year: 2027
+> About:
+Passionate about learning and coding.
+==================================
+1. Send Connection Request
+2. Back to Main Menu
+You already sent a connection request to this user.
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+You chose to search for a user.
+================== Search for User ===================
+Enter First Name:
+Enter Last Name:
+! No profile found for this name.
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+You chose to search for a user.
+================== Search for User ===================
+Enter First Name:
+Enter Last Name:
+========== Profile for: Alice Smith ==========
+> Name: Alice Smith
+> University: USF
+> Major: Computer Science
+> Graduation Year: 2026
+> About:
+Love backend APIs and data.
+==================================
+1. Send Connection Request
+2. Back to Main Menu
+You already sent a connection request to this user.
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+You chose to view pending requests.
+================= Pending Requests =================
+---- Pending Connection Requests ----
+- testuser1
+-----------------------------------
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+You chose to search for a user.
+================== Search for User ===================
+Enter First Name:
+Enter Last Name:
+========== Profile for: Jordan Williams ==========
+> Name: Jordan Williams
+> University: UCLA
+> Major: Information Technology
 > Graduation Year: 2025
 > About:
-I am good
-> Experience:
->>    Title: Software Intern
->>       Company: Tech Solutions Inc.
->>       Dates: Summer 2024
->>       Description: Worked on backend APIs.
->>    Title: Research Assistant
->>       Company: State University
->>       Dates: Sep 2023 - May 2024
->>       Description: Assisted in data analysis for ML project.
->>    Title: Project Lead
->>       Company: Open Source Org
->>       Dates: 2022
->>       Description: Led a team for open source contributions.
-> Education:
->>    Degree: Bachelor of Science
->>       School: USF12
->>       Years: 2021-2025
->>    Degree: Master of Science
->>       School: State University
->>       Years: 2025-2027
->>    Degree: Diploma in Computing
->>       School: Community College
->>       Years: 2019-2021
+Motivated and detail-oriented
 ==================================
+1. Send Connection Request
+2. Back to Main Menu
+You already sent a connection request to this user.
 Main Menu:
 1. Create/Edit User Profile
 2. View User Profile
 3. Search for User
 4. Learn a new skill
-5. Log Out
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
+Enter your choice:
+You chose to view pending requests.
+================= Pending Requests =================
+---- Pending Connection Requests ----
+- testuser1
+-----------------------------------
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. Log Out
 Enter your choice:
 You chose to search for a user.
 ================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-! No profile found for this name.
+Enter First Name:
+Enter Last Name:
+========== Profile for: Alice Smith ==========
+> Name: Alice Smith
+> University: USF
+> Major: Computer Science
+> Graduation Year: 2026
+> About:
+Love backend APIs and data.
+==================================
+1. Send Connection Request
+2. Back to Main Menu
+This user has already sent you a connection request.
 Main Menu:
 1. Create/Edit User Profile
 2. View User Profile
 3. Search for User
 4. Learn a new skill
-5. Log Out
-Enter your choice:
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-! No profile found for this name.
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-! No profile found for this name.
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-Invalid choice. Please try again.
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-! No profile found for this name.
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-! No profile found for this name.
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
-Enter your choice:
-You chose to search for a user.
-================== Search for User ===================
-Enter the user's first name:
-Enter the user's last name:
-! No profile found for this name.
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. Log Out
+5. View My Pending Connection Requests
+6. Log Out
 Enter your choice:
 Logging out. Goodbye!
  ================ Welcome to InCollege! =====================
