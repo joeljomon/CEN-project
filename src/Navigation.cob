@@ -1,4 +1,4 @@
-       IDENTIFICATION DIVISION.
+IDENTIFICATION DIVISION.
        PROGRAM-ID. INCOLLEGE-NAV.
 
        DATA DIVISION.
@@ -17,7 +17,7 @@
        MAIN-PROGRAM.
            MOVE NAV-USERNAME TO WS-USERNAME
            MOVE 0 TO WS-CHOICE
-           PERFORM UNTIL WS-CHOICE = 6
+           PERFORM UNTIL WS-CHOICE = 7
                PERFORM SHOW-MENU
                PERFORM GET-VALID-MAIN-CHOICE
                PERFORM PROCESS-CHOICE
@@ -37,7 +37,9 @@
            PERFORM WRITE-BOTH
            MOVE "5. View My Pending Connection Requests" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
-           MOVE "6. Log Out" TO WS-OUTPUT-LINE
+           MOVE "6. View My Network" TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
+           MOVE "7. Log Out" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
            MOVE "Enter your choice:" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH.
@@ -73,16 +75,23 @@
                    PERFORM WRITE-BOTH
                    CALL "SKILL-MENU"
 
-                          WHEN 5
-               MOVE "You chose to view pending requests." TO WS-OUTPUT-LINE
-               PERFORM WRITE-BOTH
-               MOVE "================= Pending Requests =================" TO WS-OUTPUT-LINE
-               PERFORM WRITE-BOTH
-               CALL "VIEW-PENDING-REQUESTS" USING WS-USERNAME
+               WHEN 5
+                   MOVE "You chose to view pending requests." TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+                   MOVE "================= Pending Requests =================" TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+                   CALL "VIEW-PENDING-REQUESTS" USING WS-USERNAME
+               
+               WHEN 6
+                   MOVE "You chose to view your network." TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+                   MOVE "================= My Network =================" TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+                   CALL "NetworkDisplay" USING WS-USERNAME
 
-           WHEN 6
-               MOVE "Logging out. Goodbye!" TO WS-OUTPUT-LINE
-               PERFORM WRITE-BOTH
+               WHEN 7
+                   MOVE "Logging out. Goodbye!" TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
 
            WHEN OTHER
                CONTINUE
@@ -91,9 +100,9 @@
 
        GET-VALID-MAIN-CHOICE.
            MOVE 0 TO WS-CHOICE
-           PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 6
+           PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 7
                PERFORM GET-CHOICE
-               IF WS-CHOICE < 1 OR WS-CHOICE > 6
+               IF WS-CHOICE < 1 OR WS-CHOICE > 7
                    MOVE "Invalid choice. Please try again." TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
                END-IF
@@ -103,7 +112,7 @@
            MOVE "READ" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE
            IF WS-LINE = HIGH-VALUES
-               MOVE 6 TO WS-CHOICE
+               MOVE 7 TO WS-CHOICE
            ELSE
                MOVE FUNCTION NUMVAL(WS-LINE(1:1)) TO WS-CHOICE
            END-IF.
