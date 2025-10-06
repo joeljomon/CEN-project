@@ -1,12 +1,12 @@
-       IDENTIFICATION DIVISION.
+IDENTIFICATION DIVISION.
        PROGRAM-ID. NETWORKDISPLAY.
 
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT CONNECTIONS-FILE ASSIGN TO "connections.dat"
+           SELECT CONNECTIONS-FILE ASSIGN TO "data/connections.dat"
                ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT PROFILES-FILE ASSIGN TO "profiles.dat"
+           SELECT PROFILES-FILE ASSIGN TO "data/profiles.dat"
                ORGANIZATION IS LINE SEQUENTIAL.
 
        DATA DIVISION.
@@ -33,22 +33,21 @@
        77 WS-CONNECTED-MAJOR PIC X(40).
        77 FOUND-FLAG         PIC X VALUE 'N'.
        77 WS-EOF             PIC X VALUE 'N'.
+       77 WS-PROFILE-EOF     PIC X VALUE 'N'.
 
        LINKAGE SECTION.
        01 LS-USERNAME        PIC X(20).
 
        PROCEDURE DIVISION USING LS-USERNAME.
-           MOVE LS-USERNAME TO WS-CURRENT-USER.
+           MOVE LS-USERNAME TO WS-CURRENT-USER
 
-           MOVE "OPEN" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
-
-           MOVE "================== View My Network ==================" TO WS-LINE
+           MOVE "--- Your Network ---" TO WS-LINE
            MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
-           OPEN INPUT CONNECTIONS-FILE.
-           MOVE 'N' TO FOUND-FLAG.
+           OPEN INPUT CONNECTIONS-FILE
+           MOVE 'N' TO FOUND-FLAG
+           MOVE 'N' TO WS-EOF
 
            PERFORM UNTIL WS-EOF = 'Y'
               READ CONNECTIONS-FILE
@@ -65,53 +64,54 @@
                        END-IF
                     END-IF
               END-READ
-           END-PERFORM.
+           END-PERFORM
 
            IF FOUND-FLAG = 'N'
               MOVE "You have no established connections." TO WS-LINE
               MOVE "WRITE" TO WS-COMMAND
               CALL "IO-MODULE" USING WS-COMMAND WS-LINE
-           END-IF.
+           END-IF
 
-           CLOSE CONNECTIONS-FILE.
-           MOVE "----------------------------------------------------" TO WS-LINE
-           CALL "IO-MODULE" USING "WRITE" WS-LINE
-
-           MOVE "CLOSE" TO WS-COMMAND
+           CLOSE CONNECTIONS-FILE
+           
+           MOVE "--------------------" TO WS-LINE
+           MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE
 
            GOBACK.
 
        DISPLAY-CONNECTION.
-           MOVE 'Y' TO FOUND-FLAG.
-           MOVE SPACES TO WS-CONNECTED-NAME WS-CONNECTED-UNIV WS-CONNECTED-MAJOR.
-           OPEN INPUT PROFILES-FILE.
-           PERFORM UNTIL EOF-PROFILE
+           MOVE 'Y' TO FOUND-FLAG
+           MOVE SPACES TO WS-CONNECTED-NAME WS-CONNECTED-UNIV WS-CONNECTED-MAJOR
+           
+           OPEN INPUT PROFILES-FILE
+           MOVE 'N' TO WS-PROFILE-EOF
+           
+           PERFORM UNTIL WS-PROFILE-EOF = 'Y'
               READ PROFILES-FILE
                  AT END
-                    EXIT PERFORM
+                    MOVE 'Y' TO WS-PROFILE-EOF
                  NOT AT END
                     IF PROFILE-USERNAME = WS-CONNECTED-USER
                        MOVE PROFILE-NAME       TO WS-CONNECTED-NAME
                        MOVE PROFILE-UNIVERSITY TO WS-CONNECTED-UNIV
                        MOVE PROFILE-MAJOR      TO WS-CONNECTED-MAJOR
-                       EXIT PERFORM
+                       MOVE 'Y' TO WS-PROFILE-EOF
                     END-IF
               END-READ
-           END-PERFORM.
-           CLOSE PROFILES-FILE.
+           END-PERFORM
+           
+           CLOSE PROFILES-FILE
 
-           STRING
-              "Connected with: " DELIMITED BY SIZE
-              WS-CONNECTED-NAME DELIMITED BY SPACE
-              " (University: " DELIMITED BY SIZE
-              WS-CONNECTED-UNIV DELIMITED BY SPACE
-              ", Major: " DELIMITED BY SIZE
-              WS-CONNECTED-MAJOR DELIMITED BY SPACE
-              ")" DELIMITED BY SIZE
+           MOVE SPACES TO WS-LINE
+           STRING "Connected with: " FUNCTION TRIM(WS-CONNECTED-NAME)
+              " (University: " FUNCTION TRIM(WS-CONNECTED-UNIV)
+              ", Major: " FUNCTION TRIM(WS-CONNECTED-MAJOR) ")"
+              DELIMITED BY SIZE
               INTO WS-LINE
            END-STRING
 
            MOVE "WRITE" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
-           EXIT.
+           CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
+
+       END PROGRAM NETWORKDISPLAY.

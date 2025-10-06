@@ -87,7 +87,7 @@ IDENTIFICATION DIVISION.
                    PERFORM WRITE-BOTH
                    MOVE "================= My Network =================" TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
-                   CALL "NetworkDisplay" USING WS-USERNAME
+                   CALL "NETWORKDISPLAY" USING WS-USERNAME
 
                WHEN 7
                    MOVE "Logging out. Goodbye!" TO WS-OUTPUT-LINE
@@ -121,3 +121,4 @@ IDENTIFICATION DIVISION.
            MOVE WS-OUTPUT-LINE TO WS-LINE
            MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
+           

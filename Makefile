@@ -5,8 +5,8 @@ BIN_DIR   := bin
 BIN       := $(BIN_DIR)/InCollegeApp
 
 # Subprograms (have USING)
-SUBS := AccountManagement.cob ConnectionRequest.cob CreateEditProfile.cob IO.cob \
-        login.cob Navigation.cob PendingRequests.cob SearchUser.cob SkillMenu.cob \
+SUBS := AccountManagement.cob AddConnection.cob ConnectionRequest.cob CreateEditProfile.cob IO.cob \
+        login.cob Navigation.cob NetworkDisplay.cob PendingRequests.cob SearchUser.cob SkillMenu.cob \
         Utilities.cob ViewProfile.cob
 
 SUB_OBJS := $(addprefix $(BUILD_DIR)/,$(SUBS:.cob=.o))
