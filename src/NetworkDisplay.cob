@@ -5,113 +5,115 @@ IDENTIFICATION DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
            SELECT CONNECTIONS-FILE ASSIGN TO "data/connections.dat"
-               ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT PROFILES-FILE ASSIGN TO "data/profiles.dat"
-               ORGANIZATION IS LINE SEQUENTIAL.
+               ORGANIZATION IS LINE SEQUENTIAL
+               FILE STATUS IS WS-CONN-STATUS.
 
        DATA DIVISION.
        FILE SECTION.
-       FD CONNECTIONS-FILE.
-       01 CONNECTION-REC.
-           05 USERNAME-ONE        PIC X(20).
-           05 USERNAME-TWO        PIC X(20).
-
-       FD PROFILES-FILE.
-       01 PROFILE-REC.
-           05 PROFILE-USERNAME    PIC X(20).
-           05 PROFILE-NAME        PIC X(40).
-           05 PROFILE-UNIVERSITY  PIC X(40).
-           05 PROFILE-MAJOR       PIC X(40).
+       FD  CONNECTIONS-FILE.
+       01  CONN-RECORD         PIC X(60).
 
        WORKING-STORAGE SECTION.
-       77 WS-COMMAND         PIC X(20).
-       77 WS-LINE            PIC X(120).
-       77 WS-CURRENT-USER    PIC X(20).
-       77 WS-CONNECTED-USER  PIC X(20).
-       77 WS-CONNECTED-NAME  PIC X(40).
-       77 WS-CONNECTED-UNIV  PIC X(40).
-       77 WS-CONNECTED-MAJOR PIC X(40).
-       77 FOUND-FLAG         PIC X VALUE 'N'.
-       77 WS-EOF             PIC X VALUE 'N'.
-       77 WS-PROFILE-EOF     PIC X VALUE 'N'.
+       01  WS-CONN-STATUS      PIC XX.
+       01  WS-OUTPUT-LINE      PIC X(80).
+       01  WS-COMMAND          PIC X(20).
+       01  WS-LINE             PIC X(80).
+       01  WS-CURRENT-USER     PIC X(20).
+       01  WS-CONNECTED-USER   PIC X(20).
+       01  WS-CONNECTION-COUNT PIC 99 VALUE 0.
+       01  WS-EOF              PIC X VALUE 'N'.
+       01  WS-TRIMMED-CURRENT  PIC X(20).
+       01  WS-USER1            PIC X(15).
+       01  WS-USER2            PIC X(15).
+       01  WS-TRIMMED-USER1    PIC X(15).
+       01  WS-TRIMMED-USER2    PIC X(15).
+       01  WS-UNIVERSITY       PIC X(15).
+       01  WS-MAJOR            PIC X(15).
 
        LINKAGE SECTION.
-       01 LS-USERNAME        PIC X(20).
+       01  LS-USERNAME         PIC X(20).
 
        PROCEDURE DIVISION USING LS-USERNAME.
-           MOVE LS-USERNAME TO WS-CURRENT-USER
+       MAIN-PROCEDURE.
+           MOVE "=================== View My Network ===================" 
+               TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
+           MOVE "--- Your Network ---" TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
 
-           MOVE "--- Your Network ---" TO WS-LINE
-           MOVE "WRITE" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+           PERFORM DISPLAY-NETWORK
 
-           OPEN INPUT CONNECTIONS-FILE
-           MOVE 'N' TO FOUND-FLAG
-           MOVE 'N' TO WS-EOF
-
-           PERFORM UNTIL WS-EOF = 'Y'
-              READ CONNECTIONS-FILE
-                 AT END
-                    MOVE 'Y' TO WS-EOF
-                 NOT AT END
-                    IF USERNAME-ONE = WS-CURRENT-USER
-                       MOVE USERNAME-TWO TO WS-CONNECTED-USER
-                       PERFORM DISPLAY-CONNECTION
-                    ELSE
-                       IF USERNAME-TWO = WS-CURRENT-USER
-                          MOVE USERNAME-ONE TO WS-CONNECTED-USER
-                          PERFORM DISPLAY-CONNECTION
-                       END-IF
-                    END-IF
-              END-READ
-           END-PERFORM
-
-           IF FOUND-FLAG = 'N'
-              MOVE "You have no established connections." TO WS-LINE
-              MOVE "WRITE" TO WS-COMMAND
-              CALL "IO-MODULE" USING WS-COMMAND WS-LINE
-           END-IF
-
-           CLOSE CONNECTIONS-FILE
-           
-           MOVE "--------------------" TO WS-LINE
-           MOVE "WRITE" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
-
+           MOVE "--------------------" TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
            GOBACK.
 
-       DISPLAY-CONNECTION.
-           MOVE 'Y' TO FOUND-FLAG
-           MOVE SPACES TO WS-CONNECTED-NAME WS-CONNECTED-UNIV WS-CONNECTED-MAJOR
-           
-           OPEN INPUT PROFILES-FILE
-           MOVE 'N' TO WS-PROFILE-EOF
-           
-           PERFORM UNTIL WS-PROFILE-EOF = 'Y'
-              READ PROFILES-FILE
-                 AT END
-                    MOVE 'Y' TO WS-PROFILE-EOF
-                 NOT AT END
-                    IF PROFILE-USERNAME = WS-CONNECTED-USER
-                       MOVE PROFILE-NAME       TO WS-CONNECTED-NAME
-                       MOVE PROFILE-UNIVERSITY TO WS-CONNECTED-UNIV
-                       MOVE PROFILE-MAJOR      TO WS-CONNECTED-MAJOR
-                       MOVE 'Y' TO WS-PROFILE-EOF
-                    END-IF
-              END-READ
-           END-PERFORM
-           
-           CLOSE PROFILES-FILE
+       DISPLAY-NETWORK.
+           MOVE FUNCTION TRIM(LS-USERNAME) TO WS-TRIMMED-CURRENT
+           MOVE 0 TO WS-CONNECTION-COUNT
 
-           MOVE SPACES TO WS-LINE
-           STRING "Connected with: " FUNCTION TRIM(WS-CONNECTED-NAME)
-              " (University: " FUNCTION TRIM(WS-CONNECTED-UNIV)
-              ", Major: " FUNCTION TRIM(WS-CONNECTED-MAJOR) ")"
-              DELIMITED BY SIZE
-              INTO WS-LINE
+           OPEN INPUT CONNECTIONS-FILE
+
+           IF WS-CONN-STATUS NOT = "00"
+               MOVE "Error opening connections file." TO WS-OUTPUT-LINE
+               PERFORM WRITE-BOTH
+           ELSE
+               READ CONNECTIONS-FILE
+                   AT END MOVE 'Y' TO WS-EOF
+               END-READ
+               PERFORM UNTIL WS-EOF = 'Y'
+                   PERFORM CHECK-CONNECTION
+                   READ CONNECTIONS-FILE
+                       AT END MOVE 'Y' TO WS-EOF
+                   END-READ
+               END-PERFORM
+               CLOSE CONNECTIONS-FILE
+           END-IF
+
+           IF WS-CONNECTION-COUNT = 0
+               MOVE "You have no connections at this time." TO WS-OUTPUT-LINE
+               PERFORM WRITE-BOTH
+           END-IF.
+
+       CHECK-CONNECTION.
+           MOVE CONN-RECORD(1:15)   TO WS-USER1
+           MOVE CONN-RECORD(16:15)  TO WS-USER2
+           MOVE CONN-RECORD(31:15)  TO WS-UNIVERSITY
+           MOVE CONN-RECORD(46:15)  TO WS-MAJOR
+
+           MOVE FUNCTION TRIM(WS-USER1) TO WS-TRIMMED-USER1
+           MOVE FUNCTION TRIM(WS-USER2) TO WS-TRIMMED-USER2
+
+           MOVE SPACES TO WS-CONNECTED-USER
+
+           IF WS-TRIMMED-USER1 = WS-TRIMMED-CURRENT
+               MOVE WS-TRIMMED-USER2 TO WS-CONNECTED-USER
+               PERFORM DISPLAY-CONNECTION-INFO
+           ELSE IF WS-TRIMMED-USER2 = WS-TRIMMED-CURRENT
+               MOVE WS-TRIMMED-USER1 TO WS-CONNECTED-USER
+               PERFORM DISPLAY-CONNECTION-INFO
+           END-IF.
+
+       DISPLAY-CONNECTION-INFO.
+           ADD 1 TO WS-CONNECTION-COUNT
+
+           STRING "Connected with: " DELIMITED BY SIZE
+                  FUNCTION TRIM(WS-CONNECTED-USER) DELIMITED BY SIZE
+                  " (University: " DELIMITED BY SIZE
+                  FUNCTION TRIM(WS-UNIVERSITY) DELIMITED BY SIZE
+                  ", Major: " DELIMITED BY SIZE
+                  FUNCTION TRIM(WS-MAJOR) DELIMITED BY SIZE
+                  ")" DELIMITED BY SIZE
+                  INTO WS-OUTPUT-LINE
            END-STRING
 
-           MOVE "WRITE" TO WS-COMMAND
-           CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
+           PERFORM WRITE-BOTH
+           MOVE " " TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH.
 
-       END PROGRAM NETWORKDISPLAY.
+       WRITE-BOTH.
+           MOVE WS-OUTPUT-LINE TO WS-LINE
+           MOVE "WRITE" TO WS-COMMAND
+           CALL "IO-MODULE" USING WS-COMMAND WS-LINE
+           MOVE SPACES TO WS-OUTPUT-LINE.
+      
+      END PROGRAM NETWORKDISPLAY.
