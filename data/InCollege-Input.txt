@@ -1,22 +1,7 @@
 1
 testuser1
 Password123!
-3
-John
-Doe
 5
 1
-Alice
-Smith
-USF
-Computer Science
-2026
-Love backend APIs and data.
-DONE
-N
-N
-N
-N
-N
-N
 6
+7
