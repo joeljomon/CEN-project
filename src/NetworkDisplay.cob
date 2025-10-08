@@ -35,9 +35,6 @@ IDENTIFICATION DIVISION.
 
        PROCEDURE DIVISION USING LS-USERNAME.
        MAIN-PROCEDURE.
-           MOVE "=================== View My Network ===================" 
-               TO WS-OUTPUT-LINE
-           PERFORM WRITE-BOTH
            MOVE "--- Your Network ---" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
 
@@ -98,11 +95,6 @@ IDENTIFICATION DIVISION.
 
            STRING "Connected with: " DELIMITED BY SIZE
                   FUNCTION TRIM(WS-CONNECTED-USER) DELIMITED BY SIZE
-                  " (University: " DELIMITED BY SIZE
-                  FUNCTION TRIM(WS-UNIVERSITY) DELIMITED BY SIZE
-                  ", Major: " DELIMITED BY SIZE
-                  FUNCTION TRIM(WS-MAJOR) DELIMITED BY SIZE
-                  ")" DELIMITED BY SIZE
                   INTO WS-OUTPUT-LINE
            END-STRING
 
