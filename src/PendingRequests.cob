@@ -30,19 +30,46 @@ IDENTIFICATION DIVISION.
        77 WS-COMMAND      PIC X(20).
        77 WS-CHOICE       PIC X(80).
        77 WS-CURRENT-REQ  PIC X(200).
+       77 WS-REQUEST-COUNT PIC 99 VALUE 0.
+       77 WS-CONTINUE     PIC X VALUE "Y".
+       77 WS-SELECTED-USER PIC X(20).
+       77 WS-LOOP-COUNTER PIC 99 VALUE 0.
+       77 WS-SELECTED-NUM PIC 99 VALUE 0.
+
+       01 WS-REQUEST-TABLE.
+          05 WS-REQUEST-ENTRY OCCURS 20 TIMES.
+             10 WS-REQ-SENDER    PIC X(20).
+             10 WS-REQ-FULL-LINE PIC X(200).
 
        LINKAGE SECTION.
        01 L-USERNAME PIC X(20).
 
        PROCEDURE DIVISION USING L-USERNAME.
        MAIN-PROGRAM.
+           MOVE 0 TO WS-REQUEST-COUNT
+           MOVE "N" TO WS-FOUND
+           
+           PERFORM LOAD-PENDING-REQUESTS
+           
+           IF WS-REQUEST-COUNT = 0
+              MOVE "You have no pending connection requests at this time." 
+                   TO WS-LINE
+              PERFORM OUT
+           ELSE
+              PERFORM DISPLAY-ALL-REQUESTS
+              PERFORM PROCESS-SELECTED-REQUEST
+           END-IF
+           
+           GOBACK.
+           
+       LOAD-PENDING-REQUESTS.
            MOVE "---- Pending Connection Requests ----" TO WS-LINE
            PERFORM OUT
-
+           
            OPEN INPUT PENDING-FILE
            IF WS-STATUS = "00"
               MOVE "N" TO EOF-FLAG
-              PERFORM UNTIL EOF-FLAG = "Y"
+              PERFORM UNTIL EOF-FLAG = "Y" OR WS-REQUEST-COUNT >= 20
                  READ PENDING-FILE INTO WS-LINE
                     AT END MOVE "Y" TO EOF-FLAG
                     NOT AT END
@@ -53,66 +80,93 @@ IDENTIFICATION DIVISION.
                        END-UNSTRING
                        
                        IF FUNCTION TRIM(RECEIVER) = FUNCTION TRIM(L-USERNAME)
+                          ADD 1 TO WS-REQUEST-COUNT
+                          MOVE SENDER TO WS-REQ-SENDER(WS-REQUEST-COUNT)
+                          MOVE WS-LINE TO WS-REQ-FULL-LINE(WS-REQUEST-COUNT)
                           MOVE "Y" TO WS-FOUND
-                          MOVE WS-LINE TO WS-CURRENT-REQ
-                          PERFORM PROCESS-REQUEST
                        END-IF
                  END-READ
               END-PERFORM
            END-IF
-           CLOSE PENDING-FILE
+           CLOSE PENDING-FILE.
 
-           IF WS-FOUND NOT = "Y"
-              MOVE "You have no pending connection requests at this time." 
-                   TO WS-LINE
+       DISPLAY-ALL-REQUESTS.
+           PERFORM VARYING WS-LOOP-COUNTER FROM 1 BY 1 
+                   UNTIL WS-LOOP-COUNTER > WS-REQUEST-COUNT
+              MOVE SPACES TO WS-LINE
+              STRING WS-LOOP-COUNTER ". Request from: " 
+                     FUNCTION TRIM(WS-REQ-SENDER(WS-LOOP-COUNTER))
+                     DELIMITED BY SIZE
+                     INTO WS-LINE
+              END-STRING
               PERFORM OUT
-           END-IF
+           END-PERFORM
+           
+           MOVE "-----------------------------------" TO WS-LINE
+           PERFORM OUT.
 
-           GOBACK.
+       PROCESS-SELECTED-REQUEST.
+           MOVE "Enter number to process (or 0 to go back):" TO WS-LINE
+           PERFORM OUT
+           
+           MOVE SPACES TO WS-CHOICE
+           MOVE "READ" TO WS-COMMAND
+           CALL "IO-MODULE" USING WS-COMMAND WS-CHOICE
+           
+           MOVE FUNCTION NUMVAL(WS-CHOICE) TO WS-SELECTED-NUM
+           
+           IF WS-SELECTED-NUM = 0
+              MOVE "N" TO WS-CONTINUE
+           ELSE IF WS-SELECTED-NUM >= 1 AND 
+                   WS-SELECTED-NUM <= WS-REQUEST-COUNT
+              MOVE WS-REQ-SENDER(WS-SELECTED-NUM) 
+                   TO WS-SELECTED-USER
+              MOVE WS-REQ-FULL-LINE(WS-SELECTED-NUM) 
+                   TO WS-CURRENT-REQ
+              PERFORM SHOW-ACCEPT-REJECT-OPTIONS
+           ELSE
+              MOVE "Invalid selection." TO WS-LINE
+              PERFORM OUT
+           END-IF.
 
-       PROCESS-REQUEST.
+       SHOW-ACCEPT-REJECT-OPTIONS.
            MOVE SPACES TO WS-LINE
-           STRING "Request from: " FUNCTION TRIM(SENDER)
+           STRING "Process request from " 
+                  FUNCTION TRIM(WS-SELECTED-USER) ":"
                   DELIMITED BY SIZE
                   INTO WS-LINE
            END-STRING
            PERFORM OUT
-
+           
            MOVE "1. Accept" TO WS-LINE
            PERFORM OUT
            MOVE "2. Reject" TO WS-LINE
            PERFORM OUT
-
-           MOVE SPACES TO WS-LINE
-           STRING "Enter your choice for " FUNCTION TRIM(SENDER) ":"
-                  DELIMITED BY SIZE
-                  INTO WS-LINE
-           END-STRING
-           PERFORM OUT
-
+           
            MOVE SPACES TO WS-CHOICE
            MOVE "READ" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-CHOICE
-
+           
            EVALUATE FUNCTION TRIM(WS-CHOICE)
               WHEN "1"
                    PERFORM ACCEPT-REQUEST
               WHEN "2"
                    PERFORM REJECT-REQUEST
               WHEN OTHER
-                   MOVE "Invalid choice. Request skipped." TO WS-LINE
+                   MOVE "Invalid choice." TO WS-LINE
                    PERFORM OUT
            END-EVALUATE
-
+           
            MOVE "-----------------------------------" TO WS-LINE
            PERFORM OUT.
 
        ACCEPT-REQUEST.
-           CALL "ADD-CONNECTION" USING L-USERNAME SENDER
+           CALL "ADD-CONNECTION" USING L-USERNAME WS-SELECTED-USER
            PERFORM REMOVE-FROM-PENDING
-
+           
            MOVE SPACES TO WS-LINE
-           STRING "Connection request from " FUNCTION TRIM(SENDER)
+           STRING "Connection request from " 
+                  FUNCTION TRIM(WS-SELECTED-USER)
                   " accepted!"
                   DELIMITED BY SIZE
                   INTO WS-LINE
@@ -121,9 +175,10 @@ IDENTIFICATION DIVISION.
 
        REJECT-REQUEST.
            PERFORM REMOVE-FROM-PENDING
-
+           
            MOVE SPACES TO WS-LINE
-           STRING "Connection request from " FUNCTION TRIM(SENDER)
+           STRING "Connection request from " 
+                  FUNCTION TRIM(WS-SELECTED-USER)
                   " rejected."
                   DELIMITED BY SIZE
                   INTO WS-LINE
@@ -131,7 +186,6 @@ IDENTIFICATION DIVISION.
            PERFORM OUT.
 
        REMOVE-FROM-PENDING.
-           CLOSE PENDING-FILE
            OPEN INPUT PENDING-FILE
            OPEN OUTPUT TEMP-FILE
            
@@ -149,9 +203,7 @@ IDENTIFICATION DIVISION.
            CLOSE PENDING-FILE
            CLOSE TEMP-FILE
            
-           CALL "SYSTEM" USING "mv data/pending.tmp data/pending.dat"
-           
-           OPEN INPUT PENDING-FILE.
+           CALL "SYSTEM" USING "mv data/pending.tmp data/pending.dat".
 
        OUT.
            MOVE "WRITE" TO WS-COMMAND
