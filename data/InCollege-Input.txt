@@ -1,7 +1,16 @@
 1
 testuser1
 Password123!
-5
-1
-6
 7
+1
+Software Engineer
+This is the description of the job.
+Responsibilities include coding, testing, and deploying software.
+DONE
+Google
+Mountain View, CA
+$32/hour
+2
+3
+8
+9
