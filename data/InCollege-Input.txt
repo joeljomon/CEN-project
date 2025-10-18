@@ -13,4 +13,18 @@ $32/hour
 2
 3
 8
+1
+testuser2
+Samplepass2!
+7
+1
+Intern Developer
+Assist in developing software applications.
+DONE
+Microsoft
+
+Redmond, WA
+
+3
+8
 9

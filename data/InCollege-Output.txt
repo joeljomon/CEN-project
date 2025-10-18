@@ -15,7 +15,7 @@ Main Menu:
 Enter your choice:
 You chose to search for jobs/internships.
 ================= Job Search/Internships =================
-================= Jobs/Internships Menu =================
+================== Jobs/Internships Menu ==================
 1. Post a Job/Internship
 2. Browse Jobs/Internships
 3. Return to Main Menu
@@ -28,15 +28,63 @@ Enter Employer Name:
 Enter Location:
 Enter Salary (optional):
 Your job has been posted.
-================= Jobs/Internships Menu =================
+================== Jobs/Internships Menu ==================
 1. Post a Job/Internship
 2. Browse Jobs/Internships
 3. Return to Main Menu
 Enter your choice:
 You chose to browse jobs/internships.
 ================== Browse Jobs/Internships ==================
-This field is under construction.
-================= Jobs/Internships Menu =================
+This feature is under construction.
+================== Jobs/Internships Menu ==================
+1. Post a Job/Internship
+2. Browse Jobs/Internships
+3. Return to Main Menu
+Enter your choice:
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Log Out
+Enter your choice:
+You chose to search for jobs/internships.
+================= Job Search/Internships =================
+================== Jobs/Internships Menu ==================
+1. Post a Job/Internship
+2. Browse Jobs/Internships
+3. Return to Main Menu
+Enter your choice:
+You chose to post a job/internship.
+================== Post Job/Internship ==================
+Enter Job Title:
+Enter Description. Type 'DONE' on a new line to finish (max 200 chars):
+Enter Employer Name:
+Enter Location:
+Location cannot be blank.
+Enter Location:
+Enter Salary (optional):
+Your job has been posted.
+================== Jobs/Internships Menu ==================
 1. Post a Job/Internship
 2. Browse Jobs/Internships
 3. Return to Main Menu
