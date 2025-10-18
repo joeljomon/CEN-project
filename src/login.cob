@@ -1,6 +1,5 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. LOGIN.
-       AUTHOR. Lakshmi Prakash.
 
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
