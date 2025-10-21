@@ -1,0 +1,180 @@
+TEST CASE 1: Successful Job Posting (all fields)
+
+1
+testuser1
+Password123!
+7
+1
+Software Intern
+Assist with software development and testing
+DONE
+TechCorp
+Remote
+$25/hour
+3
+8
+9
+
+
+TEST CASE 2: Job Posting Without Salary
+
+1
+testuser1
+Password123!
+7
+1
+Data Analyst
+Analyze and visualize data for clients
+DONE
+DataCorp
+New York, NY
+NONE
+3
+8
+9
+
+
+TEST CASE 3: Missing Required Field (Title)
+
+1
+testuser1
+Password123!
+7
+1
+
+Analyze financial data
+DONE
+FinanceCorp
+Chicago, IL
+$60,000/year
+3
+8
+9
+
+
+
+TEST CASE 4: Very Long Description (edge case)
+
+1
+testuser1
+Password123!
+7
+1
+QA Tester
+This description is intentionally made very long to test whether the program handles overflow or trimming correctly when users input more than 200 characters. The description should not break the program or crash it, but instead follow COBOL's PIC clause restrictions.
+DONE
+QualityCorp
+Miami, FL
+$20/hour
+3
+8
+9
+
+TEST CASE 5: Persistence Check
+# (Run once to add a job, then restart program
+#  to check if job is still in data file)
+
+1
+testuser1
+Password123!
+7
+1
+Backend Developer
+Maintain and improve backend systems
+DONE
+ServerCorp
+San Francisco, CA
+$90,000/year
+3
+8
+9
+
+TEST CASE 6: Multiple Job Postings in One Run
+
+1
+testuser1
+Password123!
+7
+1
+Frontend Developer
+Build user interfaces for web apps
+DONE
+UIWorks
+Austin, TX
+$80,000/year
+1
+Marketing Intern
+Assist marketing team with campaigns
+DONE
+AdCorp
+Remote
+NONE
+3
+8
+9
+
+TEST CASE 7: Browse Jobs (Under Construction)
+
+1
+testuser1
+Password123!
+7
+2
+3
+8
+9
+
+TEST CASE 8: Invalid Menu Choice (Main Menu)
+
+1
+testuser1
+Password123!
+9
+7
+3
+8
+9
+
+TEST CASE 9: Invalid Menu Choice (Job Menu)
+
+1
+testuser1
+Password123!
+7
+9
+3
+8
+9
+
+TEST CASE 10: Test the entire program
+
+1
+testuser1
+Password123!
+7
+1
+Software Engineer
+Design and implement software applications
+DONE
+TechCorp
+Remote
+$100,000/year
+1
+Data Analyst
+Analyze business and client data for insights
+DONE
+DataCorp
+New York, NY
+NONE
+9
+1
+QA Tester
+This is a very long description entered to exceed the maximum 200 characters. It should trigger the description length limit message and still allow the job posting to be completed without program crash. The system must handle this correctly.
+DONE
+QualityCorp
+Miami, FL
+$20/hour
+2
+3
+8
+9
