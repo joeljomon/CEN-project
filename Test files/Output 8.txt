@@ -1,0 +1,39 @@
+================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Log Out
+Enter your choice:
+Invalid choice. Please try again.
+You chose to search for jobs/internships.
+================= Job Search/Internships =================
+================== Jobs/Internships Menu ==================
+1. Post a Job/Internship
+2. Browse Jobs/Internships
+3. Return to Main Menu
+Enter your choice:
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Log Out
+Enter your choice:
+Logging out. Goodbye!
+================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+=============== Thank you for using InCollege! =================
