@@ -1,0 +1,158 @@
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+All permitted accounts have been created, please come back later
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Log Out
+Enter your choice:
+You chose to create or edit your profile.
+================== Create/Edit Profile ==================
+Enter First Name:
+Enter Last Name:
+Enter University/College Attended:
+Enter Major:
+Enter Graduation Year (4 digits, e.g., 2025):
+Enter About Me. Type 'DONE' on a new line to finish (max 200 chars):
+Do you want to add an Experience entry? (Y/N):
+Do you want to add an Education entry? (Y/N):
+============== Profile saved successfully. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Log Out
+Enter your choice:
+You chose to search for a user.
+================== Search for User ===================
+Enter First Name:
+Enter Last Name:
+========== Profile for: Ayush Poudel ==========
+> Name: Ayush Poudel
+> University: USF
+> Major: Comp Sci
+> Graduation Year: 2026
+> About:
+I am fine
+==================================
+1. Send Connection Request
+2. Back to Main Menu
+You already sent a connection request to this user.
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Log Out
+Enter your choice:
+You chose to search for a user.
+================== Search for User ===================
+Enter First Name:
+Enter Last Name:
+========== Profile for: Ayush Poudel ==========
+> Name: Ayush Poudel
+> University: USF
+> Major: Comp Sci
+> Graduation Year: 2026
+> About:
+I am fine
+==================================
+1. Send Connection Request
+2. Back to Main Menu
+You already sent a connection request to this user.
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Log Out
+Enter your choice:
+You chose to view pending requests.
+================= Pending Requests =================
+---- Pending Connection Requests ----
+01. Request from: sampleuser
+02. Request from: testuser2
+-----------------------------------
+Enter number to process (or 0 to go back):
+Process request from testuser2:
+1. Accept
+2. Reject
+Invalid choice.
+-----------------------------------
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
