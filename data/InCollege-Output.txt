@@ -20,70 +20,64 @@ You chose to search for jobs/internships.
 2. Browse Jobs/Internships
 3. Return to Main Menu
 Enter your choice:
-You chose to post a job/internship.
-================== Post Job/Internship ==================
-Enter Job Title:
-Enter Description. Type 'DONE' on a new line to finish (max 200 chars):
-Enter Employer Name:
-Enter Location:
-Enter Salary (optional):
-Your job has been posted.
-================== Jobs/Internships Menu ==================
-1. Post a Job/Internship
-2. Browse Jobs/Internships
-3. Return to Main Menu
-Enter your choice:
 You chose to browse jobs/internships.
 ================== Browse Jobs/Internships ==================
-This feature is under construction.
-================== Jobs/Internships Menu ==================
-1. Post a Job/Internship
-2. Browse Jobs/Internships
-3. Return to Main Menu
-Enter your choice:
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. View My Pending Connection Requests
-6. View My Network
-7. Search Jobs/Internships
-8. Log Out
-Enter your choice:
-Logging out. Goodbye!
- ================ Welcome to InCollege! =====================
-1. Log In
-2. Create New Account
-9. Exit
-================ You have successfully logged in. ===================
-Main Menu:
-1. Create/Edit User Profile
-2. View User Profile
-3. Search for User
-4. Learn a new skill
-5. View My Pending Connection Requests
-6. View My Network
-7. Search Jobs/Internships
-8. Log Out
-Enter your choice:
-You chose to search for jobs/internships.
-================= Job Search/Internships =================
-================== Jobs/Internships Menu ==================
-1. Post a Job/Internship
-2. Browse Jobs/Internships
-3. Return to Main Menu
-Enter your choice:
-You chose to post a job/internship.
-================== Post Job/Internship ==================
-Enter Job Title:
-Enter Description. Type 'DONE' on a new line to finish (max 200 chars):
-Enter Employer Name:
-Enter Location:
-Location cannot be blank.
-Enter Location:
-Enter Salary (optional):
-Your job has been posted.
+------------------ Available Jobs/Internships ------------------
+1. Software Engineer at Google, (Mountain View, CA)
+2. Intern Developer at Microsoft, (Redmond, WA)
+3. Data Engineer at TechNova Solutions, (Remote)
+4. Data Analyst at Google, (Mountain View, CA)
+5. Data Analytics Intern at Apple, (Cupertino, CA)
+6. AI Research Intern at Tesla, (Austin, TX)
+7. Software Developer Intern at Innovatech Labs, (Boston, MA)
+8. Software Developer Intern at Amazon, (Seattle, WA)
+
+Enter job number to view full details (or 0 to go back):
+
+------------------ Job Details ------------------
+> Title: Software Engineer
+> Description:
+  This is the description of the job. Responsibilities include
+   coding, testing, and deploying software.
+> Employer: Google
+> Location: Mountain View, CA
+> Salary: $32/hour
+
+Would you like to apply to this job? (Y/N):
+Your application for Software Engineer at Google has been submitted.
+------------------ Available Jobs/Internships ------------------
+1. Software Engineer at Google, (Mountain View, CA)
+2. Intern Developer at Microsoft, (Redmond, WA)
+3. Data Engineer at TechNova Solutions, (Remote)
+4. Data Analyst at Google, (Mountain View, CA)
+5. Data Analytics Intern at Apple, (Cupertino, CA)
+6. AI Research Intern at Tesla, (Austin, TX)
+7. Software Developer Intern at Innovatech Labs, (Boston, MA)
+8. Software Developer Intern at Amazon, (Seattle, WA)
+
+Enter job number to view full details (or 0 to go back):
+
+------------------ Job Details ------------------
+> Title: Software Developer Intern
+> Description:
+  Contribute to software development projects by coding, testi
+  ng, and debugging applications
+> Employer: Innovatech Labs
+> Location: Boston, MA
+> Salary: $28/hour
+
+Would you like to apply to this job? (Y/N):
+------------------ Available Jobs/Internships ------------------
+1. Software Engineer at Google, (Mountain View, CA)
+2. Intern Developer at Microsoft, (Redmond, WA)
+3. Data Engineer at TechNova Solutions, (Remote)
+4. Data Analyst at Google, (Mountain View, CA)
+5. Data Analytics Intern at Apple, (Cupertino, CA)
+6. AI Research Intern at Tesla, (Austin, TX)
+7. Software Developer Intern at Innovatech Labs, (Boston, MA)
+8. Software Developer Intern at Amazon, (Seattle, WA)
+
+Enter job number to view full details (or 0 to go back):
 ================== Jobs/Internships Menu ==================
 1. Post a Job/Internship
 2. Browse Jobs/Internships
