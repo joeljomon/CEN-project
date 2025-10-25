@@ -48,8 +48,7 @@
                    PERFORM WRITE-BOTH
                    MOVE "================== Browse Jobs/Internships ==================" TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
-                   MOVE "This feature is under construction." TO WS-OUTPUT-LINE
-                   PERFORM WRITE-BOTH
+                   CALL "BROWSE-APPLY-JOBS" USING JM-USERNAME
 
            WHEN OTHER
                CONTINUE
