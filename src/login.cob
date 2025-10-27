@@ -9,7 +9,7 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT USER-ACCOUNTS-FILE ASSIGN TO "accounts.dat"
+           SELECT USER-ACCOUNTS-FILE ASSIGN TO "data/accounts.dat"
                ORGANIZATION IS LINE SEQUENTIAL
                FILE STATUS IS WS-ACCOUNT-FILE-STATUS.
 
@@ -19,7 +19,7 @@
            LABEL RECORDS ARE STANDARD.
        01  USER-ACCOUNT-RECORD.
            05 USERNAME-F            PIC X(20).
-           05 PASSWORD-F            PIC X(12).
+           05 PASSWORD-F            PIC X(20).
 
        WORKING-STORAGE SECTION.
        01  WS-ACCOUNT-FILE-STATUS   PIC XX.
@@ -31,7 +31,7 @@
 
        01  WS-USER-INPUT.
            05 WS-USERNAME           PIC X(20).
-           05 WS-PASSWORD           PIC X(12).
+           05 WS-PASSWORD           PIC X(20).
 
        01  WS-FLAGS.
            05 WS-INPUT-EOF-FLAG     PIC A(1) VALUE 'N'.
@@ -43,7 +43,7 @@
            05 USER-TABLE.
               10 USER-ACCOUNT OCCURS 100 TIMES INDEXED BY I.
                  15 STORED-USERNAME PIC X(20).
-                 15 STORED-PASSWORD PIC X(12).
+                 15 STORED-PASSWORD PIC X(20).
 
        LINKAGE SECTION.
 
@@ -84,24 +84,16 @@
 
        2000-LOGIN-ROUTINE.
            MOVE 'N' TO WS-LOGIN-SUCCESS.
-           PERFORM WITH TEST AFTER UNTIL WS-LOGIN-SUCCESS = 'Y'
-                   OR WS-INPUT-EOF-FLAG = 'Y'
-
-
-
-               IF WS-INPUT-EOF-FLAG = 'N'
-                   PERFORM 2100-VALIDATE-CREDENTIALS
-                   IF WS-LOGIN-SUCCESS = 'Y'
-                       MOVE "You have successfully logged in."
-                         TO WS-DISPLAY-LINE
-                       PERFORM 9000-DISPLAY-LINE
-                   ELSE
-                       MOVE "Incorrect username/password, please try again"
-                         TO WS-DISPLAY-LINE
-                       PERFORM 9000-DISPLAY-LINE
-                   END-IF
-               END-IF
-           END-PERFORM.
+           PERFORM 2100-VALIDATE-CREDENTIALS.
+           IF WS-LOGIN-SUCCESS = 'Y'
+               MOVE "You have successfully logged in."
+                 TO WS-DISPLAY-LINE
+               PERFORM 9000-DISPLAY-LINE
+           ELSE
+               MOVE "Incorrect username/password, please try again"
+                 TO WS-DISPLAY-LINE
+               PERFORM 9000-DISPLAY-LINE
+           END-IF.
 
 
        2100-VALIDATE-CREDENTIALS.
@@ -116,5 +108,4 @@
 
        9000-DISPLAY-LINE.
            MOVE WS-DISPLAY-LINE TO LOGIN-MESSAGE.
-           display WS-DISPLAY-LINE.
 

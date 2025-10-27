@@ -1,52 +1,50 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. INCOLLEGE-NAV.
 
-       ENVIRONMENT DIVISION.
-       INPUT-OUTPUT SECTION.
-       FILE-CONTROL.
-           SELECT INPUT-FILE ASSIGN TO "data/InCollege-Input.txt"
-               ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT OUTPUT-FILE ASSIGN TO "data/InCollege-Output.txt"
-               ORGANIZATION IS LINE SEQUENTIAL.
-
        DATA DIVISION.
-       FILE SECTION.
-       FD INPUT-FILE.
-       01 INPUT-RECORD         PIC X(10).
-
-       FD OUTPUT-FILE.
-       01 OUTPUT-RECORD        PIC X(80).
 
        WORKING-STORAGE SECTION.
        01 WS-CHOICE            PIC 9.
        01 WS-OUTPUT-LINE       PIC X(80).
+       01 WS-SELECTION         PIC X(10).
+       01 WS-MESSAGE           PIC X(80).
+       01 WS-JOB-CHOICE        PIC 9.
 
-       PROCEDURE DIVISION.
+       LINKAGE SECTION.
+       01 NAV-USERNAME         PIC X(20).
+
+       PROCEDURE DIVISION USING NAV-USERNAME.
        MAIN-PROGRAM.
-           OPEN INPUT INPUT-FILE
-           OPEN OUTPUT OUTPUT-FILE
-
-           MOVE "Main Menu: " TO WS-OUTPUT-LINE
-           PERFORM WRITE-BOTH
-
-           PERFORM UNTIL WS-CHOICE = 4
+           DISPLAY "DEBUG: Entered Navigation"
+           MOVE 0 TO WS-CHOICE
+           DISPLAY "DEBUG: Initialized WS-CHOICE"
+           MOVE 0 TO WS-JOB-CHOICE
+           DISPLAY "DEBUG: Initialized WS-JOB-CHOICE"
+           MOVE SPACES TO WS-OUTPUT-LINE
+           DISPLAY "DEBUG: Initialized WS-OUTPUT-LINE"
+           MOVE SPACES TO WS-SELECTION
+           MOVE SPACES TO WS-MESSAGE
+           DISPLAY "DEBUG: About to enter loop"
+           PERFORM UNTIL WS-CHOICE = 6
+               DISPLAY "DEBUG: In loop"
                PERFORM SHOW-MENU
                PERFORM GET-VALID-MAIN-CHOICE
                PERFORM PROCESS-CHOICE
            END-PERFORM
-
-           CLOSE INPUT-FILE
-           CLOSE OUTPUT-FILE
-           STOP RUN.
+           GOBACK.
 
        SHOW-MENU.
-           MOVE "Search for a job" TO WS-OUTPUT-LINE
+           MOVE "1. Search for a job" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
-           MOVE "Find someone you know" TO WS-OUTPUT-LINE
+           MOVE "2. Find someone you know" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
-           MOVE "Learn a new skill" TO WS-OUTPUT-LINE
+           MOVE "3. Learn a new skill" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
-           MOVE "Exit" TO WS-OUTPUT-LINE
+           MOVE "4. View My Pending Connection Requests" TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
+           MOVE "5. View My Network" TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
+           MOVE "6. Exit" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
            MOVE "Enter your choice:" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH.
@@ -54,15 +52,21 @@
        PROCESS-CHOICE.
            EVALUATE WS-CHOICE
                WHEN 1
-                   MOVE "Job search/internship is under construction."
-                   TO WS-OUTPUT-LINE
-                   PERFORM WRITE-BOTH
+                   PERFORM JOB-SEARCH-MENU
                WHEN 2
                    MOVE "Find someone you know is under construction."
                    TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
                WHEN 3
                    PERFORM SKILL-MENU
+               WHEN 4
+                   MOVE "Pending Connection Requests is under construction."
+                   TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+               WHEN 5
+                   MOVE "View My Network is under construction."
+                   TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
            END-EVALUATE.
 
        SKILL-MENU.
@@ -92,9 +96,9 @@
 
        GET-VALID-MAIN-CHOICE.
            MOVE 0 TO WS-CHOICE
-           PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 4
+           PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 6
                PERFORM GET-CHOICE
-               IF WS-CHOICE < 1 OR WS-CHOICE > 4
+               IF WS-CHOICE < 1 OR WS-CHOICE > 6
                    MOVE "Invalid choice. Please try again." TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
                END-IF
@@ -111,13 +115,79 @@
            END-PERFORM.
 
        GET-CHOICE.
-           READ INPUT-FILE INTO INPUT-RECORD
-           MOVE FUNCTION NUMVAL(INPUT-RECORD) TO WS-CHOICE.
+           CALL "IO-MODULE" USING "READ" WS-OUTPUT-LINE
+           MOVE FUNCTION NUMVAL(WS-OUTPUT-LINE(1:1)) TO WS-CHOICE.
+
+       JOB-SEARCH-MENU.
+           MOVE 0 TO WS-JOB-CHOICE
+           PERFORM UNTIL WS-JOB-CHOICE = 4
+               MOVE "--- Job Search/Internship Menu ---" 
+                    TO WS-OUTPUT-LINE
+               PERFORM WRITE-BOTH
+               MOVE "1. Post a Job/Internship" TO WS-OUTPUT-LINE
+               PERFORM WRITE-BOTH
+               MOVE "2. Browse Jobs/Internships" TO WS-OUTPUT-LINE
+               PERFORM WRITE-BOTH
+               MOVE "3. View My Applications" TO WS-OUTPUT-LINE
+               PERFORM WRITE-BOTH
+               MOVE "4. Back to Main Menu" TO WS-OUTPUT-LINE
+               PERFORM WRITE-BOTH
+               MOVE "Enter your choice:" TO WS-OUTPUT-LINE
+               PERFORM WRITE-BOTH
+
+               PERFORM GET-CHOICE
+               MOVE WS-CHOICE TO WS-JOB-CHOICE
+
+               EVALUATE WS-JOB-CHOICE
+                   WHEN 1
+                       CALL "JOB-MGMT" USING "POST-JOB" NAV-USERNAME
+                                             WS-SELECTION WS-MESSAGE
+                   WHEN 2
+                       PERFORM BROWSE-JOBS-FLOW
+                   WHEN 3
+                       CALL "JOB-MGMT" USING "VIEW-APPS" NAV-USERNAME
+                                             WS-SELECTION WS-MESSAGE
+                   WHEN 4
+                       CONTINUE
+                   WHEN OTHER
+                       MOVE "Invalid choice. Please try again." 
+                            TO WS-OUTPUT-LINE
+                       PERFORM WRITE-BOTH
+                       MOVE 0 TO WS-JOB-CHOICE
+               END-EVALUATE
+           END-PERFORM.
+
+       BROWSE-JOBS-FLOW.
+           CALL "JOB-MGMT" USING "BROWSE" NAV-USERNAME
+                                 WS-SELECTION WS-MESSAGE
+
+           IF WS-MESSAGE = "SUCCESS"
+               PERFORM GET-CHOICE
+               MOVE WS-CHOICE TO WS-JOB-CHOICE
+               
+               IF WS-JOB-CHOICE NOT = 0
+                   MOVE WS-JOB-CHOICE TO WS-SELECTION
+                   CALL "JOB-MGMT" USING "VIEW-DETAILS" NAV-USERNAME
+                                         WS-SELECTION WS-MESSAGE
+                   
+                   IF WS-MESSAGE = "SUCCESS"
+                       PERFORM GET-CHOICE
+                       
+                       IF WS-CHOICE = 1
+                           MOVE WS-JOB-CHOICE TO WS-SELECTION
+                           CALL "JOB-MGMT" USING "APPLY" NAV-USERNAME
+                                                 WS-SELECTION WS-MESSAGE
+                           PERFORM BROWSE-JOBS-FLOW
+                       ELSE IF WS-CHOICE = 2
+                           PERFORM BROWSE-JOBS-FLOW
+                       END-IF
+                   END-IF
+               END-IF
+           END-IF.
 
        WRITE-BOTH.
-           DISPLAY FUNCTION TRIM(WS-OUTPUT-LINE)
-           MOVE WS-OUTPUT-LINE TO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD.
+           DISPLAY WS-OUTPUT-LINE
+           CALL "IO-MODULE" USING "WRITE" WS-OUTPUT-LINE.
       
 
 
