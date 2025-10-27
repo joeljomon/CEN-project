@@ -18,7 +18,8 @@ You chose to search for jobs/internships.
 ================== Jobs/Internships Menu ==================
 1. Post a Job/Internship
 2. Browse Jobs/Internships
-3. Return to Main Menu
+3. View My Applications
+4. Return to Main Menu
 Enter your choice:
 You chose to browse jobs/internships.
 ================== Browse Jobs/Internships ==================
@@ -58,15 +59,42 @@ Your application for Software Engineer at Google has been submitted.
 Enter job number to view full details (or 0 to go back):
 
 ------------------ Job Details ------------------
-> Title: Software Developer Intern
+> Title: Data Engineer
 > Description:
-  Contribute to software development projects by coding, testi
-  ng, and debugging applications
-> Employer: Innovatech Labs
-> Location: Boston, MA
-> Salary: $28/hour
+  Design and maintain data pipelines, optimize ETL processes,
+  and ensure data quality across cloud-based analytics systems
+  . Collaborate with analysts and software teams
+> Employer: TechNova Solutions
+> Location: Remote
+> Salary: $25/hour
 
 Would you like to apply to this job? (Y/N):
+Your application for Data Engineer at TechNova Solutions has been submitted.
+------------------ Available Jobs/Internships ------------------
+1. Software Engineer at Google, (Mountain View, CA)
+2. Intern Developer at Microsoft, (Redmond, WA)
+3. Data Engineer at TechNova Solutions, (Remote)
+4. Data Analyst at Google, (Mountain View, CA)
+5. Data Analytics Intern at Apple, (Cupertino, CA)
+6. AI Research Intern at Tesla, (Austin, TX)
+7. Software Developer Intern at Innovatech Labs, (Boston, MA)
+8. Software Developer Intern at Amazon, (Seattle, WA)
+
+Enter job number to view full details (or 0 to go back):
+
+------------------ Job Details ------------------
+> Title: Data Analytics Intern
+> Description:
+  Assist in collecting, cleaning, and analyzing data sets. Bui
+  ld dashboards, support business decisions, and work with ana
+  lysts to uncover insights and improve data-driven processes
+  across teams
+> Employer: Apple
+> Location: Cupertino, CA
+> Salary: NONE
+
+Would you like to apply to this job? (Y/N):
+Your application for Data Analytics Intern at Apple has been submitted.
 ------------------ Available Jobs/Internships ------------------
 1. Software Engineer at Google, (Mountain View, CA)
 2. Intern Developer at Microsoft, (Redmond, WA)
@@ -81,8 +109,47 @@ Enter job number to view full details (or 0 to go back):
 ================== Jobs/Internships Menu ==================
 1. Post a Job/Internship
 2. Browse Jobs/Internships
-3. Return to Main Menu
+3. View My Applications
+4. Return to Main Menu
 Enter your choice:
+You chose to view your applications.
+--- Your Job Applications ---
+Application Summary for testuser1
+------------------------------
+Job Title: Software Engineer
+Employer: Google
+Location: Mountain View, CA
+---
+Job Title: Data Engineer
+Employer: TechNova Solutions
+Location: Remote
+---
+Job Title: Data Analytics Intern
+Employer: Apple
+Location: Cupertino, CA
+---
+Job Title: Software Engineer
+Employer: Google
+Location: Mountain View, CA
+---
+Job Title: Data Engineer
+Employer: TechNova Solutions
+Location: Remote
+---
+Job Title: Data Analytics Intern
+Employer: Apple
+Location: Cupertino, CA
+---
+Total Applications: 6
+------------------------------
+
+================== Jobs/Internships Menu ==================
+1. Post a Job/Internship
+2. Browse Jobs/Internships
+3. View My Applications
+4. Return to Main Menu
+Enter your choice:
+Returning to Main Menu...
 Main Menu:
 1. Create/Edit User Profile
 2. View User Profile
