@@ -1,0 +1,24 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. VIEW-MESSAGES.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 WS-OUTPUT-LINE PIC X(80) VALUE SPACES.
+       01 WS-COMMAND     PIC X(20).
+
+       LINKAGE SECTION.
+       01 MSG-USERNAME   PIC X(20).
+
+       PROCEDURE DIVISION USING MSG-USERNAME.
+       MAIN-PROGRAM.
+           MOVE "Under construction. Come back later!" TO WS-OUTPUT-LINE
+           PERFORM WRITE-LINE
+
+           *> Immediately return to MESSAGE-MENU
+           GOBACK.
+
+       WRITE-LINE.
+           MOVE "WRITE" TO WS-COMMAND
+           CALL "IO-MODULE" USING WS-COMMAND, WS-OUTPUT-LINE.
+
+       END PROGRAM VIEW-MESSAGES.

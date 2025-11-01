@@ -1,2 +1,4 @@
-testuser1           FriendB
-testuser1           OtherUser
+testuser1           testuser2
+testuser1           sampleuser
+Samuel123           sampleuser
+Samuel123           testuser1

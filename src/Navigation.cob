@@ -17,7 +17,7 @@ IDENTIFICATION DIVISION.
        MAIN-PROGRAM.
            MOVE NAV-USERNAME TO WS-USERNAME
            MOVE 0 TO WS-CHOICE
-           PERFORM UNTIL WS-CHOICE = 8
+           PERFORM UNTIL WS-CHOICE = 9
                PERFORM SHOW-MENU
                PERFORM GET-VALID-MAIN-CHOICE
                PERFORM PROCESS-CHOICE
@@ -41,10 +41,13 @@ IDENTIFICATION DIVISION.
            PERFORM WRITE-BOTH
            MOVE "7. Search Jobs/Internships" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
-           MOVE "8. Log Out" TO WS-OUTPUT-LINE
+           MOVE "8. Send/View Messages" TO WS-OUTPUT-LINE
+           PERFORM WRITE-BOTH
+           MOVE "9. Log Out" TO WS-OUTPUT-LINE
            PERFORM WRITE-BOTH
            MOVE "Enter your choice:" TO WS-OUTPUT-LINE
-           PERFORM WRITE-BOTH.
+           PERFORM WRITE-BOTH. 
+           
 
        PROCESS-CHOICE.
            EVALUATE WS-CHOICE
@@ -99,6 +102,11 @@ IDENTIFICATION DIVISION.
                    CALL "JOB-MENU" USING WS-USERNAME
 
                WHEN 8
+                   MOVE "You chose to send or view messages." TO WS-OUTPUT-LINE
+                   PERFORM WRITE-BOTH
+                   CALL "MESSAGE-MENU" USING WS-USERNAME
+
+               WHEN 9
                    MOVE "Logging out. Goodbye!" TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
 
@@ -109,9 +117,9 @@ IDENTIFICATION DIVISION.
 
        GET-VALID-MAIN-CHOICE.
            MOVE 0 TO WS-CHOICE
-           PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 8
+           PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 9
                PERFORM GET-CHOICE
-               IF WS-CHOICE < 1 OR WS-CHOICE > 8
+               IF WS-CHOICE < 1 OR WS-CHOICE > 9
                    MOVE "Invalid choice. Please try again." TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
                END-IF
@@ -121,7 +129,7 @@ IDENTIFICATION DIVISION.
            MOVE "READ" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE
            IF WS-LINE = HIGH-VALUES
-               MOVE 8 TO WS-CHOICE
+               MOVE 9 TO WS-CHOICE
            ELSE
                MOVE FUNCTION NUMVAL(WS-LINE(1:1)) TO WS-CHOICE
            END-IF.
