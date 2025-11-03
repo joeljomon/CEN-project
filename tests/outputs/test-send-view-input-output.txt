@@ -20,6 +20,49 @@ You chose to send or view messages.
 2. View My Messages
 3. Back to Main Menu
 Enter your choice:
+================== Send New Message ==================
+Enter recipient's username (must be a connection):
+Enter your message (max 200 chars):
+Message sent to testuser2 successfully!
+================== Messaging Menu ==================
+1. Send a New Message
+2. View My Messages
+3. Back to Main Menu
+Enter your choice:
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Send/View Messages
+9. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Send/View Messages
+9. Log Out
+Enter your choice:
+You chose to send or view messages.
+================== Messaging Menu ==================
+1. Send a New Message
+2. View My Messages
+3. Back to Main Menu
+Enter your choice:
 ================== View My Messages ==================
 --- Your Messages ---
 Messages for testuser2

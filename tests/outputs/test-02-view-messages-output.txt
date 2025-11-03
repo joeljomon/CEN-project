@@ -75,31 +75,7 @@ Message: This is a test message to verify the messaging system works correctly!
 From: testuser1
 Message: Hello! This is a test message to a valid connection.
 ---
-From: testuser1
-Message: First message from testuser1.
----
-From: testuser1
-Message: 12345678901234567890123456789012345678901234567890123456789012345678901
----
-From: testuser1
-Message: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
----
-From: testuser1
-Message: Message with special chars: !@#$%^&*()_+-=[]{}|;:'",.<>?/~` and numbers
----
-From: testuser1
-Message: This message should persist after logout.
----
-From: testuser1
-Message: Testing with a very long username that might cause issues if not handle
----
-From: testuser1
-Message: 12345678901234567890123456789012345678901234567890123456789012345678901
----
-From: testuser1
-Message: This is a test message to verify the messaging system works correctly!
----
-Total Messages: 25
+Total Messages: 17
 ------------------------------
 
 ================== Messaging Menu ==================

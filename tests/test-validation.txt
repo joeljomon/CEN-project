@@ -1,0 +1,11 @@
+1
+testuser1
+Password123!
+8
+1
+nonexistentuser
+This should fail - user doesn't exist
+3
+9
+9
+

@@ -2,6 +2,41 @@
 1. Log In
 2. Create New Account
 9. Exit
+ =============== Invalid choice. Please try again. =================
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+ =============== Invalid choice. Please try again. =================
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+ =============== Invalid choice. Please try again. =================
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+ =============== Invalid choice. Please try again. =================
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+ ==================== Incorrect username/password, please try again ============
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+ =============== Invalid choice. Please try again. =================
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+All permitted accounts have been created, please come back later
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
 ================ You have successfully logged in. ===================
 Main Menu:
 1. Create/Edit User Profile
@@ -93,13 +128,7 @@ Message: This message should persist after logout.
 From: testuser1
 Message: Testing with a very long username that might cause issues if not handle
 ---
-From: testuser1
-Message: 12345678901234567890123456789012345678901234567890123456789012345678901
----
-From: testuser1
-Message: This is a test message to verify the messaging system works correctly!
----
-Total Messages: 25
+Total Messages: 23
 ------------------------------
 
 ================== Messaging Menu ==================

@@ -30,5 +30,9 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cob | dirs
 run: all
 	./$(BIN)
 
+rebuild: clean all
+
+.PHONY: rebuild
+
 clean:
 	rm -rf $(BUILD_DIR) $(BIN) $(BIN).exe

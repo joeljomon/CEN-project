@@ -1,0 +1,155 @@
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Send/View Messages
+9. Log Out
+Enter your choice:
+You chose to send or view messages.
+================== Messaging Menu ==================
+1. Send a New Message
+2. View My Messages
+3. Back to Main Menu
+Enter your choice:
+================== Send New Message ==================
+Enter recipient's username (must be a connection):
+Enter your message (max 200 chars):
+Message sent to sampleuser successfully!
+================== Messaging Menu ==================
+1. Send a New Message
+2. View My Messages
+3. Back to Main Menu
+Enter your choice:
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Send/View Messages
+9. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Send/View Messages
+9. Log Out
+Enter your choice:
+You chose to send or view messages.
+================== Messaging Menu ==================
+1. Send a New Message
+2. View My Messages
+3. Back to Main Menu
+Enter your choice:
+================== Send New Message ==================
+Enter recipient's username (must be a connection):
+Enter your message (max 200 chars):
+Message sent to sampleuser successfully!
+================== Messaging Menu ==================
+1. Send a New Message
+2. View My Messages
+3. Back to Main Menu
+Enter your choice:
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Send/View Messages
+9. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+================ You have successfully logged in. ===================
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Send/View Messages
+9. Log Out
+Enter your choice:
+You chose to send or view messages.
+================== Messaging Menu ==================
+1. Send a New Message
+2. View My Messages
+3. Back to Main Menu
+Enter your choice:
+================== View My Messages ==================
+--- Your Messages ---
+Messages for sampleuser
+------------------------------
+From: testuser1
+Message: This should fail because sampleuser is not directly connected
+---
+From: testuser1
+Message: Message from testuser1 to sampleuser.
+---
+From: Samuel123
+Message: Message from Samuel123 to sampleuser.
+---
+From: testuser1
+Message: This should fail because sampleuser is not directly connected
+---
+From: testuser1
+Message: Message from testuser1 to sampleuser.
+---
+From: Samuel123
+Message: Message from Samuel123 to sampleuser.
+---
+Total Messages: 6
+------------------------------
+
+================== Messaging Menu ==================
+1. Send a New Message
+2. View My Messages
+3. Back to Main Menu
+Enter your choice:
+Main Menu:
+1. Create/Edit User Profile
+2. View User Profile
+3. Search for User
+4. Learn a new skill
+5. View My Pending Connection Requests
+6. View My Network
+7. Search Jobs/Internships
+8. Send/View Messages
+9. Log Out
+Enter your choice:
+Logging out. Goodbye!
+ ================ Welcome to InCollege! =====================
+1. Log In
+2. Create New Account
+9. Exit
+ =============== Thank you for using InCollege! =================
