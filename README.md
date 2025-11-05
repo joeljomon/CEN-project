@@ -1,48 +1,50 @@
-# InCollege COBOL Project — EPIC 5
+# InCollege COBOL Project — EPIC 8
 
-## EPIC 5: Connection Management
+## EPIC 8: Messaging System (Part 1 – Send Message)
 
-This release adds the ability to manage connection requests and view your professional network.
+This release introduces the basic messaging feature that allows connected users to send private messages within the InCollege application.
 
 ### Features
 
-**Connection Request Management**
-- View all pending connection requests sent to you
-- Process each request individually with accept/reject options
-- Accepting a request:
-  - Creates a permanent bidirectional connection
-  - Stores the connection in connections.dat
-  - Removes the request from pending.dat
-- Rejecting a request:
-  - Removes the request from pending.dat without creating a connection
-- Clear confirmation messages after each action
+**Messaging Menu**
+- Added a new **Messages** option to the main post-login menu.
+- Includes two sub-options:
+  - **Send a New Message** — implemented in this release.
+  - **View My Messages** — currently under construction.
 
-**Network Display**
-- View your complete network of established connections
-- Displays each connection with their profile information (name, university, major)
-- Works bidirectionally - if you're connected to someone, they see you in their network too
+**Message Sending**
+- Allows users to send messages only to people they are already connected with.
+- Validates the recipient’s username against existing connections.
+- Displays an error if the recipient is not found or not connected.
+- Prompts the sender to type a short free-form message.
+- Confirms successful delivery after sending.
 
-### New Menu Options
-- **Option 5**: View My Pending Connection Requests (now with accept/reject)
-- **Option 6**: View My Network (new)
+**Message Storage**
+- Saves all sent messages persistently to a file.
+- Each message record includes the sender, recipient, and message content.
+- Messages remain saved even after the program is closed.
+
+**Input / Output**
+- All user inputs (menu choices, usernames, messages) are read from an input file.
+- All outputs (prompts, errors, confirmations) are displayed on screen and also written to an output file.
 
 ---
 
 ## Technical Implementation
 
 **Modified Files:**
-- `PendingRequests.cob` - Added accept/reject logic and temporary file handling for request removal
-- `Navigation.cob` - Fixed module call to match NETWORKDISPLAY program name
-- `NetworkDisplay.cob` - Bug fixes (added missing EOF variable, corrected file paths)
+- `InCollege.cob` — Added “Messages” menu integration and flow handling.
+- `Navigation.cob` — Updated main menu to include the new option.
 
 **New Files:**
-- `AddConnection.cob` - Stores accepted connections in proper format
+- `MessageHandler.cob` — Handles message input, validation, and file writing.
+- `messages.dat` — Stores all sent message records.
 
 **Data Flow:**
-1. User views pending requests (reads from `data/pending.dat`)
-2. User accepts/rejects → calls AddConnection if accepted
-3. Request removed from pending.dat using temp file swap method
-4. View Network reads from `data/connections.dat` and cross-references `data/profiles.dat`
+1. User logs in and selects **Messages** from the main menu.
+2. Chooses **Send a New Message** and enters a connected username.
+3. Types message content.
+4. Message is written to the messages file and a confirmation is displayed.
 
 ---
 
