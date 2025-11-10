@@ -1,6 +1,6 @@
-# InCollege COBOL Project — EPIC 8
+# InCollege COBOL Project — EPIC 9
 
-## EPIC 8: Messaging System (Part 1 – Send Message)
+## EPIC 9: Viewing Messages (Part 2)
 
 This release introduces the basic messaging feature that allows connected users to send private messages within the InCollege application.
 
@@ -27,6 +27,10 @@ This release introduces the basic messaging feature that allows connected users 
 **Input / Output**
 - All user inputs (menu choices, usernames, messages) are read from an input file.
 - All outputs (prompts, errors, confirmations) are displayed on screen and also written to an output file.
+
+**View Messages**
+- Messages can be viewed under view my messages now, allows user to track who sends messages to them and see if they have sent any messages as well.
+
 
 ---
 
