@@ -7,7 +7,7 @@
        01 WS-CHOICE      PIC 9 VALUE 0.
        01 WS-OUTPUT-LINE PIC X(80).
        01 WS-COMMAND     PIC X(20).
-       01 WS-LINE        PIC X(80).
+    01 WS-LINE        PIC X(500).
 
        LINKAGE SECTION.
        01 JM-USERNAME PIC X(20).
@@ -91,4 +91,3 @@
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
            
        END PROGRAM JOB-MENU.
-       
