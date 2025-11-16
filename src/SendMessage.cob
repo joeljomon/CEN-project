@@ -85,13 +85,20 @@
                MOVE "Enter your message (max 200 chars):" TO WS-OUTPUT-LINE
                PERFORM WRITE-BOTH
 
+               MOVE SPACES TO WS-LINE
+               MOVE SPACES TO WS-MESSAGE
+
                MOVE "READ" TO WS-COMMAND
                CALL "IO-MODULE" USING WS-COMMAND WS-LINE
                MOVE WS-LINE TO WS-MESSAGE
 
+               *> Robust length check: determine trimmed length and also
+               *> check whether any non-space character exists beyond 200th
+               *> position. This prevents accepting inputs that may be
+               *> truncated or mis-measured by the environment.
                COMPUTE WS-MSG-LEN = FUNCTION LENGTH(FUNCTION TRIM(WS-MESSAGE))
 
-               IF WS-MSG-LEN > 200
+               IF WS-MSG-LEN > 200 OR WS-MESSAGE(201:1) NOT = SPACE
                    MOVE "Message length exceeded. Please re-enter under 200 characters."
                        TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
