@@ -4,7 +4,7 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        77 WS-COMMAND  PIC X(20).
-       77 WS-LINE     PIC X(80).
+    77 WS-LINE     PIC X(500).
        77 WS-USERNAME PIC X(20).
        77 WS-PASSWORD PIC X(20).
        77 WS-MESSAGE  PIC X(80).
@@ -122,4 +122,5 @@
 
            GOBACK.
        END PROGRAM INCOLLEGE.
+       
        
