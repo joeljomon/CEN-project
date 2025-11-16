@@ -7,7 +7,7 @@ IDENTIFICATION DIVISION.
        01 WS-CHOICE      PIC 9 VALUE 0.
        01 WS-OUTPUT-LINE PIC X(80).
        01 WS-COMMAND     PIC X(20).
-       01 WS-LINE        PIC X(80).
+    01 WS-LINE        PIC X(500).
        01 WS-USERNAME    PIC X(20).
 
        LINKAGE SECTION.
