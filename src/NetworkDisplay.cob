@@ -17,7 +17,7 @@ IDENTIFICATION DIVISION.
        01  WS-CONN-STATUS      PIC XX.
        01  WS-OUTPUT-LINE      PIC X(80).
        01  WS-COMMAND          PIC X(20).
-       01  WS-LINE             PIC X(80).
+    01  WS-LINE             PIC X(500).
        01  WS-CURRENT-USER     PIC X(20).
        01  WS-CONNECTED-USER   PIC X(20).
        01  WS-CONNECTION-COUNT PIC 99 VALUE 0.
