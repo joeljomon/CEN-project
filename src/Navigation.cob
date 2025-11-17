@@ -1,6 +1,5 @@
 IDENTIFICATION DIVISION.
        PROGRAM-ID. INCOLLEGE-NAV.
-
        DATA DIVISION.
 
        WORKING-STORAGE SECTION.
@@ -120,7 +119,8 @@ IDENTIFICATION DIVISION.
            PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 9
                PERFORM GET-CHOICE
                IF WS-CHOICE < 1 OR WS-CHOICE > 9
-                   MOVE "Invalid choice. Please try again." TO WS-OUTPUT-LINE
+                   MOVE "Invalid choice. Please enter a number between 1 and 9." 
+                       TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
                END-IF
            END-PERFORM.
@@ -138,4 +138,3 @@ IDENTIFICATION DIVISION.
            MOVE WS-OUTPUT-LINE TO WS-LINE
            MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
-           

@@ -267,7 +267,6 @@
                    END-IF
                END-IF
            END-PERFORM
-           MOVE TMP-ABOUT TO PROF-ABOUT
 
            *> Experience (Optional, up to 3)
            MOVE 0 TO EXP-COUNT

@@ -1,6 +1,5 @@
-       IDENTIFICATION DIVISION.
+IDENTIFICATION DIVISION.
        PROGRAM-ID. SKILL-MENU.
-
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        01 WS-CHOICE      PIC 9 VALUE 0.
@@ -44,7 +43,8 @@
            PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 6
                PERFORM GET-CHOICE
                IF WS-CHOICE < 1 OR WS-CHOICE > 6
-                   MOVE "Invalid choice. Please try again." TO WS-OUTPUT-LINE
+                   MOVE "Invalid choice. Please enter a number between 1 and 6." 
+                       TO WS-OUTPUT-LINE
                    PERFORM WRITE-BOTH
                END-IF
            END-PERFORM.
@@ -63,3 +63,4 @@
            MOVE "WRITE" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
        END PROGRAM SKILL-MENU.
+      

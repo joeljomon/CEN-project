@@ -1,4 +1,4 @@
-IDENTIFICATION DIVISION.
+       IDENTIFICATION DIVISION.
        PROGRAM-ID. SEARCH-USER.
 
        ENVIRONMENT DIVISION.
@@ -31,14 +31,14 @@ IDENTIFICATION DIVISION.
 
        WORKING-STORAGE SECTION.
        77 WS-COMMAND        PIC X(20).
-       77 WS-LINE           PIC X(200).
+       77 WS-LINE           PIC X(500).
        77 WS-PROFILE-STATUS PIC XX.
        77 WS-END            PIC X VALUE "N".
        77 WS-FOUND          PIC X VALUE "N".
-       77 WS-FIRST-NAME     PIC X(80) VALUE SPACES.
-       77 WS-LAST-NAME      PIC X(80) VALUE SPACES.
-       77 WS-TMP            PIC X(80) VALUE SPACES.
-       77 WS-MATCH-USER     PIC X(20) VALUE SPACES.
+       77 WS-FIRST-NAME     PIC X(500) VALUE SPACES.
+       77 WS-LAST-NAME      PIC X(500) VALUE SPACES.
+       77 WS-TMP            PIC X(500) VALUE SPACES.
+       77 WS-MATCH-USER     PIC X(20)  VALUE SPACES.
 
        LINKAGE SECTION.
        01 L-USERNAME        PIC X(20).
@@ -47,32 +47,41 @@ IDENTIFICATION DIVISION.
        MAIN-PROGRAM.
            MOVE "N" TO WS-FOUND.
 
-           *> First Name
+           *> --- Ask for First Name ---
+           MOVE "================== Search for User ===================" 
+               TO WS-LINE
+           PERFORM OUT
+
            MOVE "Enter First Name:" TO WS-LINE
            PERFORM OUT
            MOVE SPACES TO WS-FIRST-NAME
            MOVE "READ" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-FIRST-NAME
 
-           *> Last Name
+           *> --- Ask for Last Name ---
            MOVE "Enter Last Name:" TO WS-LINE
            PERFORM OUT
            MOVE SPACES TO WS-LAST-NAME
            MOVE "READ" TO WS-COMMAND
            CALL "IO-MODULE" USING WS-COMMAND WS-LAST-NAME
 
-           *> Search profiles
+           *> --- Search profiles file ---
            OPEN INPUT PROFILE-FILE
            IF WS-PROFILE-STATUS = "00"
               MOVE "N" TO WS-END
               PERFORM UNTIL WS-END = "Y"
                  READ PROFILE-FILE
-                    AT END MOVE "Y" TO WS-END
+                    AT END
+                       MOVE "Y" TO WS-END
                     NOT AT END
-                       IF FUNCTION UPPER-CASE(FUNCTION TRIM(PROF-FIRST-NAME)) =
-                          FUNCTION UPPER-CASE(FUNCTION TRIM(WS-FIRST-NAME))
-                          AND FUNCTION UPPER-CASE(FUNCTION TRIM(PROF-LAST-NAME)) =
-                          FUNCTION UPPER-CASE(FUNCTION TRIM(WS-LAST-NAME))
+                       IF FUNCTION UPPER-CASE(
+                              FUNCTION TRIM(PROF-FIRST-NAME))
+                          = FUNCTION UPPER-CASE(
+                              FUNCTION TRIM(WS-FIRST-NAME))
+                          AND FUNCTION UPPER-CASE(
+                              FUNCTION TRIM(PROF-LAST-NAME))
+                          = FUNCTION UPPER-CASE(
+                              FUNCTION TRIM(WS-LAST-NAME))
                           MOVE "Y" TO WS-FOUND
                           MOVE PROF-USERNAME TO WS-MATCH-USER
                           MOVE "Y" TO WS-END
@@ -112,21 +121,24 @@ IDENTIFICATION DIVISION.
            PERFORM OUT
 
            MOVE SPACES TO WS-LINE
-           STRING "> University: " FUNCTION TRIM(PROF-UNIVERSITY)
+           STRING "> University: "
+                  FUNCTION TRIM(PROF-UNIVERSITY)
                   DELIMITED BY SIZE
                   INTO WS-LINE
            END-STRING
            PERFORM OUT
 
            MOVE SPACES TO WS-LINE
-           STRING "> Major: " FUNCTION TRIM(PROF-MAJOR)
+           STRING "> Major: "
+                  FUNCTION TRIM(PROF-MAJOR)
                   DELIMITED BY SIZE
                   INTO WS-LINE
            END-STRING
            PERFORM OUT
 
            MOVE SPACES TO WS-LINE
-           STRING "> Graduation Year: " PROF-GRAD-YEAR 
+           STRING "> Graduation Year: "
+                  PROF-GRAD-YEAR
                   DELIMITED BY SIZE
                   INTO WS-LINE
            END-STRING

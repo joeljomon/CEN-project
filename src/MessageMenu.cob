@@ -1,6 +1,5 @@
-       IDENTIFICATION DIVISION.
+IDENTIFICATION DIVISION.
        PROGRAM-ID. MESSAGE-MENU.
-
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        01 WS-CHOICE      PIC 9 VALUE 0.
@@ -55,7 +54,7 @@
        GET-VALID-CHOICE.
            MOVE 0 TO WS-CHOICE
            PERFORM UNTIL WS-CHOICE >= 1 AND WS-CHOICE <= 3
-               MOVE "Enter your choice: " TO WS-OUTPUT-LINE
+               MOVE "Enter your choice:" TO WS-OUTPUT-LINE
                PERFORM WRITE-BOTH
                MOVE "READ" TO WS-COMMAND
                CALL "IO-MODULE" USING WS-COMMAND WS-LINE

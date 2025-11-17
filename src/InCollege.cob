@@ -1,4 +1,4 @@
-       IDENTIFICATION DIVISION.
+IDENTIFICATION DIVISION.
        PROGRAM-ID. INCOLLEGE.
 
        DATA DIVISION.
@@ -122,5 +122,4 @@
 
            GOBACK.
        END PROGRAM INCOLLEGE.
-       
-       
+      

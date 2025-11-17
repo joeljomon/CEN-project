@@ -57,8 +57,9 @@ IDENTIFICATION DIVISION.
            CLOSE PENDING-FILE
 
            MOVE SPACES TO WS-LINE
-           STRING "Connection request sent to " 
+           STRING "Connection request sent successfully to " 
                   FUNCTION TRIM(WS-RECEIVER)
+                  "!"
                   DELIMITED BY SIZE
                   INTO WS-LINE
            END-STRING
@@ -109,3 +110,4 @@ IDENTIFICATION DIVISION.
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
 
        END PROGRAM CONNECTION-REQUEST.
+       

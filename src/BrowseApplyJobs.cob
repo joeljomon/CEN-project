@@ -254,7 +254,7 @@ IDENTIFICATION DIVISION.
                      FUNCTION TRIM(WS-JOB-TITLE(WS-SELECTED-NUM))
                      " at "
                      FUNCTION TRIM(WS-JOB-EMPLOYER(WS-SELECTED-NUM))
-                     " has been submitted."
+                     " has been submitted successfully!"
                      DELIMITED BY SIZE
                      INTO WS-LINE
               END-STRING
@@ -279,3 +279,4 @@ IDENTIFICATION DIVISION.
            CALL "IO-MODULE" USING WS-COMMAND WS-LINE.
 
        END PROGRAM BROWSE-APPLY-JOBS.
+      
